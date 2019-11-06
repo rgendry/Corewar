@@ -6,7 +6,7 @@
 #    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 18:20:25 by rgendry           #+#    #+#              #
-#    Updated: 2019/11/04 18:24:23 by rgendry          ###   ########.fr        #
+#    Updated: 2019/11/06 16:42:03 by ubartemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ FLAGS = -Wall -Wextra -Werror
 
 ASM = asm
 SRC_ASM_NAME = main.c \
+			   parse.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))
