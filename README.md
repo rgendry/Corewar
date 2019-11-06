@@ -1,1 +1,1 @@
-git clone --single-branch --branch <branchname> <remote-repo>
+git clone --single-branch --branch 'branchname' 'remote-repo'
