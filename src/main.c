@@ -34,9 +34,10 @@ int main(int argc, char **argv) {
 
     if (argc != 2)
         ft_usage();
-
-    ft_check_name(argv[1]);
+    ft_check_file_name(argv[1]);
+    ft_initialization(&champ);
     ft_reader(argv[1], &champ);
     ft_parse(&champ, -1);
+    free(champ.file);
     return 0;
 }

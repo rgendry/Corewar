@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-void ft_check_name(char *name)
+void ft_check_file_name(char *name)
 {
     int len;
 
@@ -21,24 +21,13 @@ void ft_check_name(char *name)
         ft_usage();
 }
 
-void ft_parse_com(char *str)
-{
-    int i;
-
-    i = -1;
-    while (str[++i] != '\n')
-    {
-        write(1, &str[i], 1);
-    }
-}
-
-
 void ft_check_str(t_champ *champ, char *str)
 {
-//    if (ft_strstr(NAME_CMD_STRING, str))
-//        ft_parse_name(str);
-     if (ft_strstr(COMMENT_CMD_STRING, str))
-        ft_parse_com(str);
+    if (ft_strstr(str, NAME_CMD_STRING) || champ->name->f_multi_lines_name)
+        ft_parse_name(champ, str, 0);
+    else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com)
+        ft_parse_com(champ,str);
+    // else инструкции
 }
 
 void ft_parse(t_champ *champ, int i)
@@ -49,5 +38,6 @@ void ft_parse(t_champ *champ, int i)
     while (champ->file[++i])
     {
         ft_check_str(champ, champ->file[i]);
+        champ->num_lines_file++;
     }
 }

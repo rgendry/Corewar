@@ -20,20 +20,40 @@
 # include "ft_printf.h"
 # include "op.h"
 
-typedef struct  s_champ
+typedef struct              s_name
 {
-    char        **file;
-    int         len_file;
-    int         num_lines_file; // надо ли? пока пусто
-    int         f_multi_lines_name;  // флаг для многострочного имя
-    int         f_multi_lines_com; // флаг для многострочного коммента
-}               t_champ;
+    char                    *name;
+    int                     f_multi_lines_name;  // флаг для многострочного имя
+}                           t_name;
+
+typedef struct              s_com
+{
+    char                    *comment;
+    int                     f_multi_lines_com; // флаг для многострочного коммента
+}                           t_com;
+
+typedef struct              s_champ
+{
+    char                    **file;
+    int                     len_file;
+    int                     num_lines_file; // надо ли? пока пусто
+    struct s_com            *com;
+    struct s_name           *name;
+}                           t_champ;
 
 /* parse */
 void ft_parse(t_champ *champ, int i);
-void ft_check_name(char *name);
+void ft_check_file_name(char *name);
 
 /* complementary */
 void ft_usage();
+void ft_syntax_error(t_champ *champ);
 void ft_error();
+void    ft_initialization(t_champ *champ);
+
+/* check_name */
+void ft_parse_name(t_champ *champ, char *str, int i);
+
+/* check_comment */
+void ft_parse_com(t_champ *champ, char *str);
 #endif
