@@ -21,7 +21,8 @@ FLAGS = -Wall -Wextra -Werror
 
 ASM = asm
 SRC_ASM_NAME = main.c \
-			   parse.c
+			   parse.c \
+			   complementary.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))

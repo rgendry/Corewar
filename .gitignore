@@ -4,6 +4,7 @@
 *.DS_Store
 ./cmake-build-debug
 CMakeLists.txt
+a.out
 *.a
 asm
 cmake-build-debug

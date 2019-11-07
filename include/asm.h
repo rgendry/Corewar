@@ -15,12 +15,25 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/include/libft.h"
-# include "../libft/include/get_next_line.h"
-# include "../libft/src/ft_printf/include/ft_printf.h"
+# include "libft.h"
+# include "get_next_line.h"
+# include "ft_printf.h"
 # include "op.h"
 
-void ft_parse(char *file, int i);
+typedef struct  s_champ
+{
+    char        **file;
+    int         len_file;
+    int         num_lines_file; // надо ли? пока пусто
+    int         f_multi_lines_name;  // флаг для многострочного имя
+    int         f_multi_lines_com; // флаг для многострочного коммента
+}               t_champ;
 
+/* parse */
+void ft_parse(t_champ *champ, int i);
+void ft_check_name(char *name);
 
+/* complementary */
+void ft_usage();
+void ft_error();
 #endif

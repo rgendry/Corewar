@@ -10,39 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/asm.h"
+#include "asm.h"
 
-void ft_usage()
-{
-    printf("Put one argument (file name)");
-    exit (1);
-}
-
-void ft_error()
-{
-    printf("Error");
-    exit (1);
-}
-
-char *ft_reader(char *name)
+void ft_reader(char *name, t_champ *champ)
 {
     int fd;
     int ret;
     char *buf;
-    
-    buf = (char*)malloc(sizeof(char) * 5000);
-    fd = open(name, O_RDONLY);
-    while ((ret = read(fd, buf, 5000)) < 0)
+
+    if (!(buf = ft_memalloc(50000)))
         ft_error();
-    return (buf);
+    fd = open(name, O_RDONLY);
+    while ((ret = read(fd, buf, 50000)) < 0)
+        ft_error();
+    champ->len_file = ret; // вместо ft_strlen
+    champ->file = ft_strsplit(buf, '\n');
+    ft_strdel(&buf);
+    close(fd);
 }
 
 int main(int argc, char **argv) {
-    char *file;
+    t_champ champ;
+
     if (argc != 2)
         ft_usage();
-    
-    file = ft_reader(argv[1]);
-    ft_parse(file, -1);
+
+    ft_check_name(argv[1]);
+    ft_reader(argv[1], &champ);
+    ft_parse(&champ, -1);
     return 0;
 }

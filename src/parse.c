@@ -1,4 +1,25 @@
-#include "../include/asm.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/07 13:41:09 by ubartemi          #+#    #+#             */
+/*   Updated: 2019/11/07 13:41:13 by ubartemi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "asm.h"
+
+void ft_check_name(char *name)
+{
+    int len;
+
+    len = ft_strlen(name);
+    if (name[len - 1] != 's' || name[len - 2] != '.')
+        ft_usage();
+}
 
 void ft_parse_com(char *str)
 {
@@ -11,12 +32,8 @@ void ft_parse_com(char *str)
     }
 }
 
-//void ft_parse_name(char *str)
-//{
-//
-//}
 
-void ft_check_str(char *str)
+void ft_check_str(t_champ *champ, char *str)
 {
 //    if (ft_strstr(NAME_CMD_STRING, str))
 //        ft_parse_name(str);
@@ -24,21 +41,13 @@ void ft_check_str(char *str)
         ft_parse_com(str);
 }
 
-void ft_parse(char *file, int i)
+void ft_parse(t_champ *champ, int i)
 {
     int start;
-    char *tmp;
 
     start = 0;
-    while (++i < (int)ft_strlen(file))
+    while (champ->file[++i])
     {
-        if (file[i] == '\n')
-        {
-            tmp = (char*)malloc(sizeof(char) * (i - start) + 1);
-            strlcpy(tmp, file + start, i);
-            ft_check_str(tmp);
-            start += i;
-            ft_strdel(&tmp);
-        }
+        ft_check_str(champ, champ->file[i]);
     }
 }
