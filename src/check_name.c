@@ -12,17 +12,13 @@
 
 #include "asm.h"
 
-void ft_parse_name(t_champ *champ, char *str, int i)
+void ft_flag_zero(t_champ *champ, int len_decl_name, char *str, int i)
 {
-    int decl_name_len;
-
-    decl_name_len = ft_strlen(NAME_CMD_STRING);
     while (str[i] == ' ' || str[i] == '\t')
         i++;
-    if (ft_strncmp(NAME_CMD_STRING, str + i, decl_name_len))
+    if (ft_strncmp(NAME_CMD_STRING, str + i, len_decl_name))
         ft_syntax_error(champ);
-    i += decl_name_len;
-    ft_printf("%d\n", i);
+    i += len_decl_name;
     while (str[++i])
     {
         if (str[i] == ' ' || str[i] == '\t')
@@ -35,6 +31,17 @@ void ft_parse_name(t_champ *champ, char *str, int i)
             champ->name->f_multi_lines_name = 0;
         else
             ft_syntax_error(champ);
-
     }
+}
+
+void ft_parse_name(t_champ *champ, char *str, int i)
+{
+    int len_decl_name;
+
+    len_decl_name = ft_strlen(NAME_CMD_STRING);
+    if (champ->name->f_multi_lines_name == 0)
+        ft_flag_zero(champ, len_decl_name, str, -1);
+//    else
+//        ft_flag_one();
+
 }

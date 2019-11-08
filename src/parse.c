@@ -37,7 +37,7 @@ void ft_parse(t_champ *champ, int i)
     start = 0;
     while (champ->file[++i])
     {
-        ft_check_str(champ, champ->file[i]);
         champ->num_lines_file++;
+        ft_check_str(champ, champ->file[i]);
     }
 }

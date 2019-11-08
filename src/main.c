@@ -12,21 +12,25 @@
 
 #include "asm.h"
 
-void ft_reader(char *name, t_champ *champ)
+void ft_reader(t_champ *champ, int fd, char *str, char *buf)
 {
-    int fd;
-    int ret;
-    char *buf;
+    char *tmp;
 
-    if (!(buf = ft_memalloc(50000)))
-        ft_error();
-    fd = open(name, O_RDONLY);
-    while ((ret = read(fd, buf, 50000)) < 0)
-        ft_error();
-    champ->len_file = ret; // вместо ft_strlen
-    champ->file = ft_strsplit(buf, '\n');
-    ft_strdel(&buf);
+    while ((get_next_line(fd, &buf)) > 0)
+    {
+        tmp = str;
+        str = ft_strjoin(str, buf);
+        free(tmp);
+        tmp = str;
+        str = ft_strjoin(str, "\n");
+        free(tmp);
+        free(buf);
+    }
+    champ->len_file = ft_strlen(str);
+    champ->file = ft_strsplit(str, '\n');
+    ft_strdel(&str);
     close(fd);
+    ft_print_matrix(champ->file);
 }
 
 int main(int argc, char **argv) {
@@ -36,8 +40,8 @@ int main(int argc, char **argv) {
         ft_usage();
     ft_check_file_name(argv[1]);
     ft_initialization(&champ);
-    ft_reader(argv[1], &champ);
+    ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, -1);
-    free(champ.file);
+    free(champ.file); // need function for clear everything
     return 0;
 }

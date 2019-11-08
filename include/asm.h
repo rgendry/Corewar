@@ -36,7 +36,7 @@ typedef struct              s_champ
 {
     char                    **file;
     int                     len_file;
-    int                     num_lines_file; // надо ли? пока пусто
+    int                     num_lines_file;
     struct s_com            *com;
     struct s_name           *name;
 }                           t_champ;
@@ -50,6 +50,7 @@ void ft_usage();
 void ft_syntax_error(t_champ *champ);
 void ft_error();
 void    ft_initialization(t_champ *champ);
+void ft_print_matrix(char **matrix); // will need to delete this function
 
 /* check_name */
 void ft_parse_name(t_champ *champ, char *str, int i);
