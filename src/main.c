@@ -30,7 +30,7 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
     champ->file = ft_strsplit(str, '\n');
     ft_strdel(&str);
     close(fd);
-    ft_print_matrix(champ->file);
+//    ft_print_matrix(champ->file);
 }
 
 int main(int argc, char **argv) {
@@ -43,5 +43,6 @@ int main(int argc, char **argv) {
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, -1);
     free(champ.file); // need function for clear everything
-    return 0;
+    ft_clear_everything(&champ);
+    exit (0);
 }

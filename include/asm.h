@@ -23,6 +23,7 @@
 typedef struct              s_name
 {
     char                    *name;
+    int                     len_name;
     int                     f_multi_lines_name;  // флаг для многострочного имя
 }                           t_name;
 
@@ -41,6 +42,8 @@ typedef struct              s_champ
     struct s_name           *name;
 }                           t_champ;
 
+char	*ft_strndup(const char *s1, size_t n);
+
 /* parse */
 void ft_parse(t_champ *champ, int i);
 void ft_check_file_name(char *name);
@@ -51,9 +54,10 @@ void ft_syntax_error(t_champ *champ);
 void ft_error();
 void    ft_initialization(t_champ *champ);
 void ft_print_matrix(char **matrix); // will need to delete this function
+void ft_clear_everything(t_champ *champ);
 
 /* check_name */
-void ft_parse_name(t_champ *champ, char *str, int i);
+void ft_parse_name(t_champ *champ, char *str);
 
 /* check_comment */
 void ft_parse_com(t_champ *champ, char *str);

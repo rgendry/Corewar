@@ -14,6 +14,8 @@
 
 void ft_parse_com(t_champ *champ, char *str)
 {
-    ft_printf("%s\n%d\n", str, champ->len_file);
+    if (champ->name->f_multi_lines_name)
+        ft_error();
+    ft_printf("\n\n%s\n%d\n", str, champ->len_file);
     exit(0);
 }

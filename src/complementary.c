@@ -41,6 +41,17 @@ void ft_error()
     exit (1);
 }
 
+void ft_clear_everything(t_champ *champ)
+{
+    int i;
+
+    i = -1;
+    while (champ->file[++i])
+        ft_strdel(&champ->file[i]);
+    ft_strdel(champ->file);
+    ft_strdel(&champ->name->name);
+}
+
 void    ft_initialization(t_champ *champ)
 {
     champ->len_file = 0;
@@ -51,7 +62,8 @@ void    ft_initialization(t_champ *champ)
         ft_error();
     champ->com->f_multi_lines_com = 0;
     champ->com->comment = NULL;
-    champ->name->f_multi_lines_name = 0;
+    champ->name->f_multi_lines_name = -1;
     champ->name->name = NULL;
+    champ->name->len_name = 0;
 
 }

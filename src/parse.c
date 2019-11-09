@@ -24,7 +24,7 @@ void ft_check_file_name(char *name)
 void ft_check_str(t_champ *champ, char *str)
 {
     if (ft_strstr(str, NAME_CMD_STRING) || champ->name->f_multi_lines_name)
-        ft_parse_name(champ, str, 0);
+        ft_parse_name(champ, str);
     else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com)
         ft_parse_com(champ,str);
     // else инструкции
