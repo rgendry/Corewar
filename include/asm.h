@@ -30,6 +30,7 @@ typedef struct              s_name
 typedef struct              s_com
 {
     char                    *comment;
+    int                     len_com;
     int                     f_multi_lines_com; // флаг для многострочного коммента
 }                           t_com;
 
@@ -52,9 +53,11 @@ void ft_check_file_name(char *name);
 void ft_usage();
 void ft_syntax_error(t_champ *champ);
 void ft_error();
-void    ft_initialization(t_champ *champ);
+void ft_initialization(t_champ *champ);
 void ft_print_matrix(char **matrix); // will need to delete this function
-void ft_clear_everything(t_champ *champ);
+void ft_clear_everything(t_champ *champ, int i);
+void ft_name_error();
+int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD);
 
 /* check_name */
 void ft_parse_name(t_champ *champ, char *str);

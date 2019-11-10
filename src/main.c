@@ -23,8 +23,8 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
         free(tmp);
         tmp = str;
         str = ft_strjoin(str, "\n");
-        free(tmp);
-        free(buf);
+        ft_strdel(&tmp);
+        ft_strdel(&buf);
     }
     champ->len_file = ft_strlen(str);
     champ->file = ft_strsplit(str, '\n');
@@ -42,7 +42,6 @@ int main(int argc, char **argv) {
     ft_initialization(&champ);
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, -1);
-    free(champ.file); // need function for clear everything
-    ft_clear_everything(&champ);
-    exit (0);
+    ft_clear_everything(&champ, -1);
+    return (0); // in the end will need to chang on exit
 }
