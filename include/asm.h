@@ -61,4 +61,7 @@ void ft_parse_name(t_champ *champ, char *str);
 
 /* check_comment */
 void ft_parse_com(t_champ *champ, char *str);
+
+/* comment */
+int is_comment(char sym);
 #endif

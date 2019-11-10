@@ -25,7 +25,8 @@ SRC_ASM_NAME = main.c \
 			   complementary.c \
 			   check_name.c \
 			   check_comment.c \
-			   ft_strndup.c
+			   ft_strndup.c \
+			   comment.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))
