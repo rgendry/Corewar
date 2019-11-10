@@ -14,18 +14,15 @@
 
 void ft_write_name(t_champ *champ, char *str, int i)
 {
-    int len_name;
     char *tmp;
 
-    if (champ->name->f_multi_lines_name == -1 ||
-    champ->name->len_name >= PROG_NAME_LENGTH)
+    if (champ->name->f_multi_lines_name == -1)
         ft_syntax_error(champ);
-    len_name = champ->name->len_name;
-    while (str[i] != '"')
+    while (str[i] && str[i] != '"')
         i++;
     if (ft_strstr(str, NAME_CMD_STRING))
     {
-        tmp = ft_strndup(str + i + 1, len_name);
+        tmp = ft_strndup(str + i + 1, champ->name->len_name);
         if (champ->name->f_multi_lines_name == 1)
             champ->name->name = ft_strjoin(tmp, "\n");
         else
@@ -34,19 +31,14 @@ void ft_write_name(t_champ *champ, char *str, int i)
     }
     else
     {
-        tmp = ft_strndup(str + i + 1, len_name);
+        tmp = ft_strndup(str + i + 1, champ->name->len_name);
         champ->name->name = ft_strjoin(tmp, str + i + 1);
         ft_strdel(&tmp);
     }
 }
 
-void ft_flag_zero(t_champ *champ, int len_decl_name, char *str, int i)
+void ft_flag_zero(t_champ *champ, char *str, int i)
 {
-    while (str[i] == ' ' || str[i] == '\t')
-        i++;
-    if (ft_strncmp(NAME_CMD_STRING, str + i, len_decl_name))
-        ft_syntax_error(champ);
-    i += len_decl_name;
     while (str[++i])
     {
         if ((str[i] == ' ' || str[i] == '\t') && champ->name->f_multi_lines_name != 1)
@@ -95,13 +87,10 @@ void ft_flag_one(t_champ *champ, char *str, int i, char *name)
 
 void ft_parse_name(t_champ *champ, char *str)
 {
-    int len_decl_name;
-
-    len_decl_name = ft_strlen(NAME_CMD_STRING);
     if (champ->name->f_multi_lines_name == -1)
-        ft_flag_zero(champ, len_decl_name, str, 0);
+        ft_flag_zero(champ, str, ft_check_cmd_string(champ, str, 0, 'n'));
     else
         ft_flag_one(champ, str, 0, NULL);
-   // ft_printf("%s", champ->name->name);
-
+    if (ft_strlen(champ->name->name) >= PROG_NAME_LENGTH)
+        ft_syntax_error(champ);
 }
