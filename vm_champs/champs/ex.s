@@ -1,4 +1,4 @@
-.name "bkjndiubadsiufbdsaikfjldsofijdsifjadsifiuasnfuiewfuewfjebnvhvldksaviobhdfbiuadfbuvhreuvhwefiojeiofejwifjeiwjfiewjvgikjngvirej"
+.name "Batman"
 .comment"just 
 a basic 
 living 

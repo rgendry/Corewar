@@ -37,13 +37,19 @@ typedef struct              s_com
 typedef struct              s_champ
 {
     char                    **file;
+    int                     fd_byte;
     int                     len_file;
     int                     num_lines_file;
     struct s_com            *com;
     struct s_name           *name;
+    char                    *byte_code;
 }                           t_champ;
 
 char	*ft_strndup(const char *s1, size_t n);
+int		ft_lennum(int num);
+char	*ft_itoa_hex(long long int n, char sym);
+int	    ft_lennum_hex(long long int num);
+void	ft_putnbr_hex_fd(int n, int fd);
 
 /* parse */
 void ft_parse(t_champ *champ, int i);
@@ -67,4 +73,10 @@ void ft_parse_com(t_champ *champ, char *str);
 
 /* comment */
 int is_comment(char sym);
+
+/* name_to_byte_code */
+void ft_name_to_byte(t_champ *champ, int i);
+
+/* translation */
+void ft_translation(t_champ *champ);
 #endif

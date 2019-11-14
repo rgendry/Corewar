@@ -39,6 +39,4 @@ void ft_parse(t_champ *champ, int i)
     }
     if (champ->name->name == NULL) // || comment
         ft_name_error();
-    ft_printf("NAME - %s\n", champ->name->name);
-    ft_printf("COMM - %s\n", champ->com->comment);
 }

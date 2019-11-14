@@ -26,7 +26,13 @@ SRC_ASM_NAME = main.c \
 			   check_name.c \
 			   check_comment.c \
 			   ft_strndup.c \
-			   comment.c
+			   comment.c \
+			   name_to_byte_code.c \
+			   ft_lennum.c \
+			   translation.c \
+			   ft_lennum_hex.c \
+			   ft_itoa_hex.c \
+			   ft_putnbr_fd.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))
