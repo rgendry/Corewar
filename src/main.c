@@ -12,25 +12,21 @@
 
 #include "asm.h"
 
-void ft_reader(t_champ *champ, int fd, char *str, char *buf)
+void ft_reader(char *name, t_champ *champ)
 {
-    char *tmp;
+    int fd;
+    int ret;
+    char *buf;
 
-    while ((get_next_line(fd, &buf)) > 0)
-    {
-        tmp = str;
-        str = ft_strjoin(str, buf);
-        free(tmp);
-        tmp = str;
-        str = ft_strjoin(str, "\n");
-        ft_strdel(&tmp);
-        ft_strdel(&buf);
-    }
-    champ->len_file = ft_strlen(str);
-    champ->file = ft_strsplit(str, '\n');
-    ft_strdel(&str);
+    if (!(buf = ft_memalloc(50000)))
+        ft_error();
+    fd = open(name, O_RDONLY);
+    while ((ret = read(fd, buf, 50000)) < 0)
+        ft_error();
+    champ->len_file = ret; // вместо ft_strlen
+    champ->file = ft_strsplit(buf, '\n');
+    ft_strdel(&buf);
     close(fd);
-//    ft_print_matrix(champ->file);
 }
 
 int main(int argc, char **argv) {
@@ -40,8 +36,8 @@ int main(int argc, char **argv) {
         ft_usage();
     ft_check_file_name(argv[1]);
     ft_initialization(&champ);
-    ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
+    ft_reader(argv[1], &champ);
     ft_parse(&champ, -1);
-    ft_clear_everything(&champ, -1);
-    return (0); // in the end will need to chang on exit
+    free(champ.file);
+    return 0;
 }

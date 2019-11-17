@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/04 18:36:03 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/17 18:56:35 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@
 typedef struct              s_name
 {
     char                    *name;
-    int                     len_name;
     int                     f_multi_lines_name;  // флаг для многострочного имя
 }                           t_name;
 
 typedef struct              s_com
 {
     char                    *comment;
-    int                     len_com;
     int                     f_multi_lines_com; // флаг для многострочного коммента
 }                           t_com;
 
@@ -38,12 +36,10 @@ typedef struct              s_champ
 {
     char                    **file;
     int                     len_file;
-    int                     num_lines_file;
+    int                     num_lines_file; // надо ли? пока пусто
     struct s_com            *com;
     struct s_name           *name;
 }                           t_champ;
-
-char	*ft_strndup(const char *s1, size_t n);
 
 /* parse */
 void ft_parse(t_champ *champ, int i);
@@ -53,18 +49,23 @@ void ft_check_file_name(char *name);
 void ft_usage();
 void ft_syntax_error(t_champ *champ);
 void ft_error();
-void ft_initialization(t_champ *champ);
-void ft_print_matrix(char **matrix); // will need to delete this function
-void ft_clear_everything(t_champ *champ, int i);
-void ft_name_error();
-int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD);
+void    ft_initialization(t_champ *champ);
 
 /* check_name */
-void ft_parse_name(t_champ *champ, char *str);
+void ft_parse_name(t_champ *champ, char *str, int i);
 
 /* check_comment */
 void ft_parse_com(t_champ *champ, char *str);
 
-/* comment */
-int is_comment(char sym);
+int		check_arg_type(char *str);
+void	check_opertaions(char *str);
+int	check_type2(char **token, int label);
+int	check_type3(char **token, int label);
+int	check_type4(char **token, int label);
+int	check_type5(char **token, int label);
+int	check_type6(char **token, int label);
+int	check_type7(char **token, int label);
+int	check_type8(char **token, int label);
+int	check_type9(char **token, int label);
+
 #endif
