@@ -27,7 +27,8 @@ void ft_check_str(t_champ *champ, char *str)
         ft_parse_name(champ, str);
     else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com == 1)
         ft_parse_com(champ,str);
-    // else инструкции
+    else
+        check_opertaions(str);
 }
 
 void ft_parse(t_champ *champ, int i)

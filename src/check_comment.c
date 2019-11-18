@@ -44,7 +44,7 @@ void ft_flag_minus(t_champ *champ, char *str, int i)
         if ((str[i] == ' ' || str[i] == '\t') && champ->com->f_multi_lines_com != 1)
             continue;
         if ((ft_isalpha(str[i]) || str[i] == ' ' || str[i] == '\t')
-        && champ->com->f_multi_lines_com == 1)
+            && champ->com->f_multi_lines_com == 1)
         {
             champ->com->len_com++;
             continue;

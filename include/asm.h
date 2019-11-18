@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/04 18:36:03 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/17 18:56:35 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,16 @@ void ft_parse_com(t_champ *champ, char *str);
 
 /* comment */
 int is_comment(char sym);
+
+int		check_arg_type(char *str);
+void	check_opertaions(char *str);
+int	check_type2(char **token, int label);
+int	check_type3(char **token, int label);
+int	check_type4(char **token, int label);
+int	check_type5(char **token, int label);
+int	check_type6(char **token, int label);
+int	check_type7(char **token, int label);
+int	check_type8(char **token, int label);
+int	check_type9(char **token, int label);
+
 #endif

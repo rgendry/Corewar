@@ -32,19 +32,19 @@ void ft_usage()
 void ft_syntax_error(t_champ *champ)
 {
     printf("Syntax error at line number %d\n", champ->num_lines_file);
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 void ft_name_error()
 {
     printf("In the champion file with the extension .s missing name of champion\n");
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 void ft_error()
 {
     printf("Error\n");
-    exit (1);
+    exit (EXIT_FAILURE);
 }
 
 void ft_clear_everything(t_champ *champ, int i)

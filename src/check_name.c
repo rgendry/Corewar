@@ -43,8 +43,8 @@ void ft_flag_zero(t_champ *champ, char *str, int i)
     {
         if ((str[i] == ' ' || str[i] == '\t') && champ->name->f_multi_lines_name != 1)
             continue;
-        if ((ft_isalpha(str[i]) || str[i] == ' ' || str[i] == '\t')
-        && champ->name->f_multi_lines_name == 1)
+        if ((ft_isascii(str[i]) || str[i] == ' ' || str[i] == '\t')
+            && champ->name->f_multi_lines_name == 1)
         {
             champ->name->len_name++;
             continue;
