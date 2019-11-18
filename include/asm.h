@@ -43,6 +43,7 @@ typedef struct              s_champ
     struct s_com            *com;
     struct s_name           *name;
     char                    *byte_code;
+    unsigned char           *m_header;
 }                           t_champ;
 
 char	*ft_strndup(const char *s1, size_t n);
@@ -79,4 +80,11 @@ void ft_name_to_byte(t_champ *champ, int i);
 
 /* translation */
 void ft_translation(t_champ *champ);
+
+/* assembly */
+void ft_assembly(t_champ *champ);
+
+/* magic_header_to_byte */
+void ft_magic_header(t_champ *champ, int i);
+
 #endif

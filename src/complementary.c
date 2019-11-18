@@ -56,6 +56,8 @@ void ft_clear_everything(t_champ *champ, int i)
     ft_strdel(&champ->com->comment);
     free(champ->name);
     free(champ->com);
+    free(champ->m_header);
+    free(champ->byte_code);
 }
 
 int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD)

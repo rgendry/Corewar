@@ -43,8 +43,7 @@ void ft_flag_zero(t_champ *champ, char *str, int i)
     {
         if ((str[i] == ' ' || str[i] == '\t') && champ->name->f_multi_lines_name != 1)
             continue;
-        if ((ft_isalpha(str[i]) || str[i] == ' ' || str[i] == '\t')
-        && champ->name->f_multi_lines_name == 1)
+        if (ft_isascii(str[i]) && champ->name->f_multi_lines_name == 1 && str[i] != '"')
         {
             champ->name->len_name++;
             continue;
@@ -93,4 +92,5 @@ void ft_parse_name(t_champ *champ, char *str)
         ft_flag_one(champ, str, 0, NULL);
     if (ft_strlen(champ->name->name) >= PROG_NAME_LENGTH)
         ft_syntax_error(champ);
+   // ft_printf("%s\n", champ->name->name);
 }

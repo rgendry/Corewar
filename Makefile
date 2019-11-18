@@ -32,7 +32,9 @@ SRC_ASM_NAME = main.c \
 			   translation.c \
 			   ft_lennum_hex.c \
 			   ft_itoa_hex.c \
-			   ft_putnbr_fd.c
+			   ft_putnbr_fd.c \
+			   assembly.c \
+			   magic_header_to_byte.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))
