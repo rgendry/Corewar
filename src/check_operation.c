@@ -71,7 +71,7 @@ void	check_opertaions(char *str)
 	char	*newstr;
 	char	**token;
 
-	if (!str)
+	if (is_emptystr(str))
 		return ;
 	newstr = spaces(str);
 	ft_strdel(&str);

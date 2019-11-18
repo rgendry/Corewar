@@ -58,6 +58,7 @@ void ft_print_matrix(char **matrix); // will need to delete this function
 void ft_clear_everything(t_champ *champ, int i);
 void ft_name_error();
 int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD);
+int is_emptystr(char *str);
 
 /* check_name */
 void ft_parse_name(t_champ *champ, char *str);

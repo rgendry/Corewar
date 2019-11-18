@@ -71,6 +71,22 @@ int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD)
     return (i - 1);
 }
 
+int is_emptystr(char *str)
+{
+    int i;
+
+    i = -1;
+    if (!str)
+        return (1);
+    while (str[++i])
+    {
+        if (str[i] == ' ' || str[i] == '\t')
+            continue;
+        return (0);
+    }
+    return (1);
+}
+
 void    ft_initialization(t_champ *champ)
 {
     champ->len_file = 0;
@@ -84,5 +100,4 @@ void    ft_initialization(t_champ *champ)
     champ->name->f_multi_lines_name = -1;
     champ->name->name = NULL;
     champ->name->len_name = 0;
-
 }
