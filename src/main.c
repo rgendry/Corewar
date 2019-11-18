@@ -16,6 +16,8 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
 {
     char *tmp;
 
+    if (fd == -1)
+        ft_usage();
     while ((get_next_line(fd, &buf)) > 0)
     {
         tmp = str;
