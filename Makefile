@@ -6,7 +6,7 @@
 #    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 18:20:25 by rgendry           #+#    #+#              #
-#    Updated: 2019/11/06 16:42:03 by ubartemi         ###   ########.fr        #
+#    Updated: 2019/11/18 17:15:09 by rgendry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC_ASM_NAME = main.c \
 			   check_args.c \
 			   check_operation.c \
 			   check_instructions.c \
-			   check_instructions2.c
+			   check_instructions2.c \
+			   create_label.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))

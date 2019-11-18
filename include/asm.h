@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/04 18:36:03 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/18 17:12:47 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "op.h"
+
+typedef struct  s_label
+{
+    char            *name;
+    int             place;
+    struct s_label  *next;
+}                   t_label;
 
 typedef struct              s_name
 {
@@ -41,6 +48,7 @@ typedef struct              s_champ
     int                     num_lines_file;
     struct s_com            *com;
     struct s_name           *name;
+    struct s_label          *labels;
 }                           t_champ;
 
 char	*ft_strndup(const char *s1, size_t n);
@@ -70,7 +78,7 @@ void ft_parse_com(t_champ *champ, char *str);
 int is_comment(char sym);
 
 int		check_arg_type(char *str);
-void	check_opertaions(char *str);
+void	check_opertaions(t_champ *champ, char *str);
 int	check_type2(char **token, int label);
 int	check_type3(char **token, int label);
 int	check_type4(char **token, int label);
@@ -80,4 +88,7 @@ int	check_type7(char **token, int label);
 int	check_type8(char **token, int label);
 int	check_type9(char **token, int label);
 
+int		check_label(char *str);
+t_label	*create_label(char	*data);
+int	    add_label(t_label **head, t_label *new);
 #endif

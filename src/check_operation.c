@@ -6,13 +6,13 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/17 18:57:32 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/18 17:23:59 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		check_operation_type(char *str, char **token, int label)
+int		check_operation_type(t_champ *champ, char *str, char **token, int label)
 {
 	if (ft_strstr(str, "live") || ft_strstr(str, "zjmp")
 		|| ft_strstr(str, "fork") || ft_strstr(str, "lfork"))
@@ -32,32 +32,32 @@ int		check_operation_type(char *str, char **token, int label)
 		return (check_type8(token, label));
 	if (ft_strstr(str, "aff"))
 		return (check_type9(token, label));
-	if (ft_strchr(str, ':'))
-		return (1);
+	if (check_label(str))
+		return (add_label(&(champ->labels), create_label(str)));
 	return (0);
 }
 
-char	*spaces(char *str)
+char	*spaces(char *str, int i, int j)
 {
 	char	*new;
-	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	if (!(new = (char *)malloc(sizeof(char) * (ft_strlen(str) * 2))))
 		return (NULL);
 	while (str[i] != '\0')
 	{
 		if (str[i] == ' ' || str[i] == '\t')
 			new[j] = ',';
-		else if ((str[i] == '%' || str[i] == ':') && new[j - 1] != ',')
+		else if (str[i] == '%' && new[j - 1] != ',')
 		{
 			new[j] = ',';
 			i--;
 		}
 		else
+		{
 			new[j] = str[i];
+			if (new[j] == ':' && new[j - 1] && new[j - 1] != '%')
+				new[++j] = ',';
+		}
 		i++;
 		j++;
 	}
@@ -65,7 +65,7 @@ char	*spaces(char *str)
 	return (new);
 }
 
-void	check_opertaions(char *str)
+void	check_opertaions(t_champ *champ, char *str)
 {
 	int		type;
 	char	*newstr;
@@ -73,12 +73,12 @@ void	check_opertaions(char *str)
 
 	if (is_emptystr(str))
 		return ;
-	newstr = spaces(str);
+	newstr = spaces(str, 0, 0);
 	ft_strdel(&str);
 	token = ft_strsplit(newstr, ',');
-	type = check_operation_type(token[0], token, 0);
+	type = check_operation_type(champ, token[0], token, 0);
 	if (type == 1)
-		type = check_operation_type(token[1], token, 1);
+		type = check_operation_type(champ, token[1], token, 1);
 	if (type < 2)
 		ft_error();
 }
