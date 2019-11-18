@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/04 18:37:07 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/18 17:11:28 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
     }
     champ->len_file = ft_strlen(str);
     champ->file = ft_strsplit(str, '\n');
+    champ->labels = NULL;
     ft_strdel(&str);
     close(fd);
 //    ft_print_matrix(champ->file);

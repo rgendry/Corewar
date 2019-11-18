@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:09 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/07 13:41:13 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/11/18 17:12:03 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ft_check_str(t_champ *champ, char *str)
     else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com == 1)
         ft_parse_com(champ,str);
     else
-        check_opertaions(str);
+        check_opertaions(champ, str);
 }
 
 void ft_parse(t_champ *champ, int i)
