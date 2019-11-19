@@ -74,11 +74,13 @@ void	check_opertaions(t_champ *champ, char *str)
 	if (is_emptystr(str))
 		return ;
 	newstr = spaces(str, 0, 0);
-	ft_strdel(&str);
+	ft_strdel(&str); // зачем чистить? это же строчка из общего файла,
+	// который понадобится дл перевода в байт код
 	token = ft_strsplit(newstr, ',');
-	type = check_operation_type(champ, token[0], token, 0);
-	if (type == 1)
-		type = check_operation_type(champ, token[1], token, 1);
+	type = check_operation_type(champ, token[0], token, 0); // если метка в одной строке "entry:",
+//	то она вроде записывается создается список, а здесь возвращается 1
+	if (type == 1) // поэтому заходит сюда
+		type = check_operation_type(champ, token[1], token, 1); // и тут сега
 	if (type < 2)
 		ft_error();
 }
