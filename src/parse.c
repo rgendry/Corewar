@@ -23,12 +23,16 @@ void ft_check_file_name(char *name)
 
 void ft_check_str(t_champ *champ, char *str)
 {
-    if (ft_strstr(str, NAME_CMD_STRING) || champ->name->f_multi_lines_name == 1)
+    if (is_comment(str))
+        return;
+    else if (ft_strstr(str, NAME_CMD_STRING) || champ->name->f_multi_lines_name == 1)
         ft_parse_name(champ, str);
     else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com == 1)
         ft_parse_com(champ,str);
-    else
+    else if (champ->name->name && champ->com->comment)
         check_opertaions(champ, str);
+    else
+        ft_errors(champ);
 }
 
 void ft_parse(t_champ *champ, int i)
@@ -38,8 +42,7 @@ void ft_parse(t_champ *champ, int i)
         champ->num_lines_file++;
         ft_check_str(champ, champ->file[i]);
     }
-    if (champ->name->name == NULL) // || comment
-        ft_name_error();
+    ft_errors(champ);
     ft_printf("NAME - %s\n", champ->name->name);
     ft_printf("COMM - %s\n", champ->com->comment);
 }

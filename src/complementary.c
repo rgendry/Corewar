@@ -35,12 +35,6 @@ void ft_syntax_error(t_champ *champ)
     exit (EXIT_FAILURE);
 }
 
-void ft_name_error()
-{
-    printf("In the champion file with the extension .s missing name of champion\n");
-    exit (EXIT_FAILURE);
-}
-
 void ft_error()
 {
     printf("Error\n");
@@ -100,4 +94,32 @@ void    ft_initialization(t_champ *champ)
     champ->name->f_multi_lines_name = -1;
     champ->name->name = NULL;
     champ->name->len_name = 0;
+}
+
+int is_comment(char *str)
+{
+    if (*str == COMMENT_CHAR || *str == ALT_COMMENT_CHAR)
+        return (1);
+    return (0);
+}
+
+void ft_errors(t_champ *champ)
+{
+    if (champ->name->name == NULL)
+    {
+        printf("In the champion file with the extension .s missing name of champion\n");
+        exit (EXIT_FAILURE);
+    }
+    if (champ->com->comment == NULL)
+    {
+        printf("In the champion file with the extension .s missing comment of champion\n");
+        exit (EXIT_FAILURE);
+    }
+    if (champ->name->f_multi_lines_name == 1 || champ->com->f_multi_lines_com == 1)
+    {
+        printf("In the champion file with the extension .s missing closing quote\n");
+        exit (EXIT_FAILURE);
+    }
+    ft_error();
+
 }

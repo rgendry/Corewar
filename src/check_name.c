@@ -52,6 +52,8 @@ void ft_flag_zero(t_champ *champ, char *str, int i)
             champ->name->f_multi_lines_name = 1;
         else if (str[i] == '"' && champ->name->f_multi_lines_name == 1)
             champ->name->f_multi_lines_name = 0;
+        else if (is_comment(str + i))
+            break;
         else
             ft_syntax_error(champ);
     }

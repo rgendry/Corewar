@@ -1,5 +1,5 @@
 .name	"Leeloo"
-.comment "Multipass"
+.comment "
 .extend
 	
 begin:	ld %0,r6

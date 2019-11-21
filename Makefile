@@ -26,7 +26,6 @@ SRC_ASM_NAME = main.c \
 			   check_name.c \
 			   check_comment.c \
 			   ft_strndup.c \
-               comment.c \
 			   check_args.c \
 			   check_operation.c \
 			   check_instructions.c \

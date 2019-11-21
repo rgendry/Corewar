@@ -52,6 +52,8 @@ void ft_flag_minus(t_champ *champ, char *str, int i)
             champ->com->f_multi_lines_com = 1;
         else if (str[i] == '"' && champ->com->f_multi_lines_com == 1)
             champ->com->f_multi_lines_com = 0;
+        else if (is_comment(str + i))
+            break;
         else
             ft_syntax_error(champ);
     }
@@ -86,6 +88,8 @@ void ft_flag_plus(t_champ *champ, char *str, int i, char *name)
 
 void ft_parse_com(t_champ *champ, char *str)
 {
+    if (champ->name->f_multi_lines_name == 1)
+        ft_errors(champ);
     if (champ->com->f_multi_lines_com == -1)
         ft_flag_minus(champ, str, ft_check_cmd_string(champ, str, 0, 'c'));
     else

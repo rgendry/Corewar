@@ -1,8 +1,8 @@
 #by zaz, it's not very good, but what did you expect, rainbowdash is way better
 #2013
 
-.name		"fluttershy"
-.comment	"oh, my, what a scary project"
+.name		"fluttershy"        #2013
+.comment	"oh, my, what a scary project"#2013
 
 entry:
 	fork	%:coregeni
