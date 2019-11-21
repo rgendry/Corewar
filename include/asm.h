@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/18 17:12:47 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/21 16:51:52 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,5 @@ int	check_type9(char **token, int label);
 int		check_label(char *str);
 t_label	*create_label(char	*data);
 int	    add_label(t_label **head, t_label *new);
+int	arr_len(char **arr);
 #endif

@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/21 16:32:47 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/21 17:22:20 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		check_operation_type(t_champ *champ, char *str, char **token, int label)
 		return (check_type3(token, label));
 	if (ft_strstr(str, "sti"))
 		return (check_type8(token, label));
-	if (ft_strstr(str, "st")) // sti заходит сюда а до своего условия не доходит (можно просто местами поменять)
+	if (ft_strstr(str, "st"))
 		return (check_type4(token, label));
 	if (ft_strstr(str, "add") || ft_strstr(str, "sub"))
 		return (check_type5(token, label));
@@ -78,13 +78,9 @@ void	check_opertaions(t_champ *champ, char *str)
 		return ;
 	newstr = spaces(str, 0, 0);
 	token = ft_strsplit(newstr, ',');
-	type = check_operation_type(champ, token[0], token, 0); // если метка в одной строке "entry:",
-//	то она вроде записывается создается список, а здесь возвращается 1 (turtle.s)
-	if (type == 1 && token[1]) // поэтому заходит сюда
-		type = check_operation_type(champ, token[1], token, 1); // и тут сега
-	if (type < 1) // тк c sti заходит в st возвращает 0 и пишет ерор (not tutrle.s)
-	{
-		printf("Hello\n");
+	type = check_operation_type(champ, token[0], token, 0);
+	if (type == 1 && token[1])
+		type = check_operation_type(champ, token[1], token, 1);
+	if (type < 1)
 		ft_error();
-	}
 }
