@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/21 17:22:20 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/21 18:18:26 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	check_opertaions(t_champ *champ, char *str)
 	char	*newstr;
 	char	**token;
 
-	printf("%s\n", str);
 	if (is_emptystr(str))
 		return ;
 	newstr = spaces(str, 0, 0);
@@ -82,5 +81,5 @@ void	check_opertaions(t_champ *champ, char *str)
 	if (type == 1 && token[1])
 		type = check_operation_type(champ, token[1], token, 1);
 	if (type < 1)
-		ft_error();
+		ft_syntax_error(champ);
 }
