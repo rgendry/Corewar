@@ -25,19 +25,19 @@ void ft_print_matrix(char **matrix)
 
 void ft_usage()
 {
-    printf("Enter only one name of a champion *.s\n");
+    ft_printf("Enter only one name of a champion *.s\n");
     exit (1);
 }
 
 void ft_syntax_error(t_champ *champ)
 {
-    printf("Syntax error at line number %d\n", champ->num_lines_file);
+    ft_printf("Syntax error at line number %d\n", champ->num_lines_file);
     exit (EXIT_FAILURE);
 }
 
 void ft_error()
 {
-    printf("Error\n");
+    ft_printf("Error\n");
     exit (EXIT_FAILURE);
 }
 
@@ -120,6 +120,4 @@ void ft_errors(t_champ *champ)
         printf("In the champion file with the extension .s missing closing quote\n");
         exit (EXIT_FAILURE);
     }
-    ft_error();
-
 }
