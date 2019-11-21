@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/08 14:30:50 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/17 18:31:27 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/21 16:27:47 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		check_reg(char *str)
 int		check_dir(char *str)
 {
 	str++;
+	if (*str == '-')
+		str++;
 	while (*str >= '0' && *str <= '9')
 		str++;
 	if (!*str || *str == ':')
@@ -34,6 +36,8 @@ int		check_indir(char *str)
 {
 	if (*str == ':')
 		return (3);
+	if (*str == '-')
+		str++;
 	while (*str >= '0' && *str <= '9')
 		str++;
 	if (!*str)
