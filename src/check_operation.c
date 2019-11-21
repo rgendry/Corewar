@@ -19,7 +19,7 @@ int		check_operation_type(t_champ *champ, char *str, char **token, int label)
 		return (check_type2(token, label));
 	if (ft_strstr(str, "ld") || ft_strstr(str, "lld"))
 		return (check_type3(token, label));
-	if (ft_strstr(str, "st"))
+	if (ft_strstr(str, "st")) // sti заходит сюда а до своего условия не доходит (можно просто местами поменять)
 		return (check_type4(token, label));
 	if (ft_strstr(str, "add") || ft_strstr(str, "sub"))
 		return (check_type5(token, label));
@@ -78,9 +78,9 @@ void	check_opertaions(t_champ *champ, char *str)
 	// который понадобится дл перевода в байт код
 	token = ft_strsplit(newstr, ',');
 	type = check_operation_type(champ, token[0], token, 0); // если метка в одной строке "entry:",
-//	то она вроде записывается создается список, а здесь возвращается 1
+//	то она вроде записывается создается список, а здесь возвращается 1 (turtle.s)
 	if (type == 1) // поэтому заходит сюда
 		type = check_operation_type(champ, token[1], token, 1); // и тут сега
-	if (type < 2)
+	if (type < 2) // тк c sti заходит в st возвращает 0 и пишет ерор (not tutrle.s)
 		ft_error();
 }
