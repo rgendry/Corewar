@@ -30,7 +30,12 @@ SRC_ASM_NAME = main.c \
 			   check_operation.c \
 			   check_instructions.c \
 			   check_instructions2.c \
-			   create_label.c
+			   create_label.c \
+			   assembly.c \
+			   translation.c \
+			   magic_header_to_byte.c \
+			   ft_lennum.c   \
+			   ft_lennum_hex.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))

@@ -73,6 +73,8 @@ void	check_opertaions(t_champ *champ, char *str)
 	char	*newstr;
 	char	**token;
 
+	if (champ->start_instr == 0)
+	    champ->start_instr = champ->num_lines_file;
 	if (is_emptystr(str))
 		return ;
 	newstr = spaces(str, 0, 0);
@@ -82,4 +84,6 @@ void	check_opertaions(t_champ *champ, char *str)
 		type = check_operation_type(champ, token[1], token, 1);
 	if (type < 1)
 		ft_syntax_error(champ);
+    free_arr(&token);
+    ft_strdel(&newstr);
 }

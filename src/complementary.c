@@ -41,6 +41,38 @@ void ft_error()
     exit (EXIT_FAILURE);
 }
 
+void free_nodes(t_label **nodes)
+{
+    t_label *node;
+    t_label *next;
+
+    node = *nodes;
+    while (node)
+    {
+        next = node->next;
+        ft_strdel(&(node->name));
+        node->next = NULL;
+        free(node);
+        node = next;
+    }
+    *nodes = NULL;
+}
+
+void free_arr(char ***arr)
+{
+    int i;
+
+    i = 0;
+    while ((*arr)[i])
+    {
+        free((*arr)[i]);
+        (*arr)[i] = NULL;
+        i++;
+    }
+    free(*arr);
+    *arr = NULL;
+}
+
 void ft_clear_everything(t_champ *champ, int i)
 {
     while (champ->file[++i])
@@ -50,6 +82,8 @@ void ft_clear_everything(t_champ *champ, int i)
     ft_strdel(&champ->com->comment);
     free(champ->name);
     free(champ->com);
+    free_nodes(&(champ->labels));
+
 }
 
 int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD)
@@ -94,6 +128,7 @@ void    ft_initialization(t_champ *champ)
     champ->name->f_multi_lines_name = -1;
     champ->name->name = NULL;
     champ->name->len_name = 0;
+    champ->start_instr = 0;
 }
 
 int is_comment(char *str)

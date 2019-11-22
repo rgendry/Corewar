@@ -43,15 +43,23 @@ typedef struct              s_com
 
 typedef struct              s_champ
 {
+    int                     start_instr;
     char                    **file;
     int                     len_file;
     int                     num_lines_file;
     struct s_com            *com;
     struct s_name           *name;
     struct s_label          *labels;
+    int                     fd_byte;
+    char                    *byte_code;
+    unsigned char           *m_header;
 }                           t_champ;
 
 char	*ft_strndup(const char *s1, size_t n);
+int		ft_lennum(int num);
+char	*ft_itoa_hex(long long int n, char sym);
+int	    ft_lennum_hex(long long int num);
+void	ft_putnbr_hex_fd(int n, int fd);
 
 /* parse */
 void ft_parse(t_champ *champ, int i);
@@ -68,6 +76,7 @@ int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD);
 int is_emptystr(char *str);
 int is_comment(char *str);
 void ft_errors(t_champ *champ);
+void free_arr(char ***arr);
 
 /* check_name */
 void ft_parse_name(t_champ *champ, char *str);
@@ -91,4 +100,15 @@ int		check_label(char *str);
 t_label	*create_label(char	*data);
 int	    add_label(t_label **head, t_label *new);
 int	arr_len(char **arr);
+
+
+
+/* magic_header_to_byte */
+void ft_magic_header(t_champ *champ, int i);
+
+/* assembly */
+void ft_assembly(t_champ *champ);
+
+/* translation */
+void ft_translation(t_champ *champ);
 #endif
