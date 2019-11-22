@@ -43,6 +43,4 @@ void ft_parse(t_champ *champ, int i)
         ft_check_str(champ, champ->file[i]);
     }
     ft_errors(champ);
-    ft_printf("NAME - %s\n", champ->name->name);
-    ft_printf("COMM - %s\n", champ->com->comment);
 }

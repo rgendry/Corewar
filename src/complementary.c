@@ -129,6 +129,8 @@ void    ft_initialization(t_champ *champ)
     champ->name->name = NULL;
     champ->name->len_name = 0;
     champ->start_instr = 0;
+    if (!(champ->four_zero_bytes = ft_memalloc(4)))
+        ft_error();
 }
 
 int is_comment(char *str)

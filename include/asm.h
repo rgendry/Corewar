@@ -52,7 +52,8 @@ typedef struct              s_champ
     struct s_label          *labels;
     int                     fd_byte;
     char                    *byte_code;
-    unsigned char           *m_header;
+    char                    *m_header;
+    char                    *four_zero_bytes;
 }                           t_champ;
 
 char	*ft_strndup(const char *s1, size_t n);

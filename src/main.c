@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
     ft_initialization(&champ);
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, -1);
-   // ft_translation(&champ);
+    ft_translation(&champ);
     ft_clear_everything(&champ, -1);
     return (0); // in the end will need to chang on exit
 }
