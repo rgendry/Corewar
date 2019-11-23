@@ -18,72 +18,7 @@ void ft_print_matrix(char **matrix)
 
     i = -1;
     while (matrix[++i])
-    {
         ft_printf("%s\n", matrix[i]);
-    }
-}
-
-void ft_usage()
-{
-    ft_printf("Enter only one name of a champion *.s\n");
-    exit (1);
-}
-
-void ft_syntax_error(t_champ *champ)
-{
-    ft_printf("Syntax error at line number %d\n", champ->num_lines_file);
-    exit (EXIT_FAILURE);
-}
-
-void ft_error()
-{
-    ft_printf("Error\n");
-    exit (EXIT_FAILURE);
-}
-
-void free_nodes(t_label **nodes)
-{
-    t_label *node;
-    t_label *next;
-
-    node = *nodes;
-    while (node)
-    {
-        next = node->next;
-        ft_strdel(&(node->name));
-        node->next = NULL;
-        free(node);
-        node = next;
-    }
-    *nodes = NULL;
-}
-
-void free_arr(char ***arr)
-{
-    int i;
-
-    i = 0;
-    while ((*arr)[i])
-    {
-        free((*arr)[i]);
-        (*arr)[i] = NULL;
-        i++;
-    }
-    free(*arr);
-    *arr = NULL;
-}
-
-void ft_clear_everything(t_champ *champ, int i)
-{
-    while (champ->file[++i])
-        free(champ->file[i]);
-    free(champ->file);
-    ft_strdel(&champ->name->name);
-    ft_strdel(&champ->com->comment);
-    free(champ->name);
-    free(champ->com);
-    free_nodes(&(champ->labels));
-
 }
 
 int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD)
@@ -117,20 +52,20 @@ int is_emptystr(char *str)
 
 void    ft_initialization(t_champ *champ)
 {
-    champ->len_file = 0;
-    champ->num_lines_file = 0;
-    champ->file = NULL;
-    champ->name = NULL;
     if (!(champ->com = malloc(sizeof(t_com))) || !(champ->name = malloc(sizeof(t_name))))
         ft_error();
-    champ->com->f_multi_lines_com = -1;
-    champ->com->comment = NULL;
-    champ->name->f_multi_lines_name = -1;
-    champ->name->name = NULL;
-    champ->name->len_name = 0;
-    champ->start_instr = 0;
     if (!(champ->four_zero_bytes = ft_memalloc(4)))
         ft_error();
+    champ->com->comment = NULL;
+    champ->name->name = NULL;
+    champ->labels = NULL;
+    champ->file = NULL;
+    champ->len_file = 0;
+    champ->num_lines_file = 0;
+    champ->com->f_multi_lines_com = -1;
+    champ->name->f_multi_lines_name = -1;
+    champ->name->len_name = 0;
+    champ->start_instr = 0;
 }
 
 int is_comment(char *str)
@@ -140,21 +75,3 @@ int is_comment(char *str)
     return (0);
 }
 
-void ft_errors(t_champ *champ)
-{
-    if (champ->name->name == NULL)
-    {
-        printf("In the champion file with the extension .s missing name of champion\n");
-        exit (EXIT_FAILURE);
-    }
-    if (champ->com->comment == NULL)
-    {
-        printf("In the champion file with the extension .s missing comment of champion\n");
-        exit (EXIT_FAILURE);
-    }
-    if (champ->name->f_multi_lines_name == 1 || champ->com->f_multi_lines_com == 1)
-    {
-        printf("In the champion file with the extension .s missing closing quote\n");
-        exit (EXIT_FAILURE);
-    }
-}
