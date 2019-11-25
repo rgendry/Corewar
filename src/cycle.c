@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 16:27:07 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 17:22:38 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_cycle(t_champ *champ, int i)
     {
         newstr = spaces(champ->file[i], 0, 0);
 		token = ft_strsplit(newstr, ',');
-		add_instr(&byte_code, instruction_to_byte(token, check_label(token[0])));
+		add_instr(&byte_code, instruction_to_byte(champ, token, check_label(token[0])));
 		i++;
     }
 }

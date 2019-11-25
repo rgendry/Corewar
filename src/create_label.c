@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:54:11 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/18 17:09:02 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 18:32:46 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_label	*create_label(char	*data)
 
 	if (!(new = (t_label *)malloc(sizeof(t_label))))
 		ft_error();
-	new->name = ft_strdup(data);
+	new->name = ft_strndup(data, (ft_strlen(data) - 1));
 	new->place = 0;
 	new->next = NULL;
 	return (new);

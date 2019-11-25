@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 16:23:46 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 19:07:49 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void ft_print_matrix(char **matrix); // will need to delete this function
 int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD);
 int is_emptystr(char *str);
 int is_comment(char *str);
+int	arr_len(char **arr);
 
 /* cleaning */
 void free_nodes(t_label **nodes);
@@ -115,13 +116,9 @@ int	check_type6(char **token, int label);
 int	check_type7(char **token, int label);
 int	check_type8(char **token, int label);
 int	check_type9(char **token, int label);
-
 int		check_label(char *str);
 t_label	*create_label(char	*data);
 int	    add_label(t_label **head, t_label *new);
-int	arr_len(char **arr);
-
-
 
 /* magic_header_to_byte */
 void ft_magic_header(t_champ *champ, int i);
@@ -132,5 +129,9 @@ void ft_assembly(t_champ *champ);
 /* translation */
 void	ft_cycle(t_champ *champ, int i);
 void ft_translation(t_champ *champ);
-t_instr	*instruction_to_byte(char **token, int label);
+t_instr	*instruction_to_byte(t_champ *champ, char **token, int label);
+char	*reg_to_byte(char *str);
+char	*dir_to_byte(t_champ *champ, char *str, int type);
+//char	*indir_to_byte(t_champ *champ, char *str);
+
 #endif

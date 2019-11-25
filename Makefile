@@ -6,7 +6,7 @@
 #    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 18:20:25 by rgendry           #+#    #+#              #
-#    Updated: 2019/11/25 16:25:06 by rgendry          ###   ########.fr        #
+#    Updated: 2019/11/25 17:17:01 by rgendry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC_ASM_NAME = main.c \
 			   ft_lennum.c   \
 			   ft_lennum_hex.c \
 			   cycle.c \
-			   instruction_to_byte.c
+			   instruction_to_byte.c \
+			   arg_to_byte.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))

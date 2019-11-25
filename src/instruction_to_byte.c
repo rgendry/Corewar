@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 16:25:33 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 19:07:42 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,25 @@ char	arg_type(char **token, int label)
 	return (res);
 }
 
-// char	*arg_to_byte(char *str)
-// {
-// 	char	arg[4];
-// 	return (arg);
-// }
+char	*arg_to_byte(t_champ *champ, char *str, char type)
+{
+	if (check_arg_type(str) == 1)
+		return (reg_to_byte(str));
+	if (check_arg_type(str) == 2)
+	{
+		if ((type >= 1 && type <= 8) || type == 13 || type == 16)
+			return (dir_to_byte(champ, str, 4));
+		if ((type >= 9 && type <= 12) || type == 14 || type == 15)
+			return (dir_to_byte(champ, str, 2));
+		ft_error();
+	}
+	// if (check_arg_type(str) == 3)
+	// 	return (indir_to_byte(champ, str));
+	ft_error();
+	return (NULL);
+}
 
-t_instr	*instruction_to_byte(char **token, int label)
+t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 {
 	t_instr	*byte_code;
 
@@ -79,11 +91,11 @@ t_instr	*instruction_to_byte(char **token, int label)
 	if (byte_code->instr != 1 && byte_code->instr != 9 &&
 		byte_code->instr != 12 && byte_code->instr != 15)
 		byte_code->type = arg_type(token, label);
-	// byte_code->arg1 = arg_to_byte(token[1 + label]);
-	// if (token[2 + label])
-	// 	byte_code->arg2 = arg_to_byte(token[2 + label]);
-	// if (token[3 + label])
-	// 	byte_code->arg2 = arg_to_byte(token[3 + label]);
+	byte_code->arg1 = arg_to_byte(champ, token[1 + label], byte_code->instr);
+	if (token[2 + label])
+		byte_code->arg2 = arg_to_byte(champ, token[2 + label], byte_code->instr);
+	if (token[3 + label])
+		byte_code->arg2 = arg_to_byte(champ, token[3 + label], byte_code->instr);
 	byte_code->next = NULL;
 	return (byte_code);
 }
