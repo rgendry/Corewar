@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 15:44:21 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 16:23:46 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct          s_instr
     char                *arg1;
     char                *arg2;
     char                *arg3;
-    struct s_instruct   *next;
+    struct s_instr      *next;
 }                       t_instr;
 
 typedef struct  s_label
@@ -104,6 +104,7 @@ void ft_parse_com(t_champ *champ, char *str);
 
 
 /* check instr */
+char	*spaces(char *str, int i, int j);
 int		check_arg_type(char *str);
 void	check_opertaions(t_champ *champ, char *str);
 int	check_type2(char **token, int label);
@@ -129,5 +130,7 @@ void ft_magic_header(t_champ *champ, int i);
 void ft_assembly(t_champ *champ);
 
 /* translation */
+void	ft_cycle(t_champ *champ, int i);
 void ft_translation(t_champ *champ);
+t_instr	*instruction_to_byte(char **token, int label);
 #endif

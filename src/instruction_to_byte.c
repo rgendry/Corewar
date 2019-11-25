@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 15:47:48 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 16:25:33 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ char	arg_type(char **token, int label)
 	return (res);
 }
 
-char	*arg_to_byte(char *str)
-{
-	char	arg[4];
-	return (arg);
-}
+// char	*arg_to_byte(char *str)
+// {
+// 	char	arg[4];
+// 	return (arg);
+// }
 
-void	instruction_to_byte(char **token, int label)
+t_instr	*instruction_to_byte(char **token, int label)
 {
 	t_instr	*byte_code;
 
@@ -79,10 +79,11 @@ void	instruction_to_byte(char **token, int label)
 	if (byte_code->instr != 1 && byte_code->instr != 9 &&
 		byte_code->instr != 12 && byte_code->instr != 15)
 		byte_code->type = arg_type(token, label);
-	byte_code->arg1 = arg_to_byte(token[1 + label]);
-	if (token[2 + label])
-		byte_code->arg2 = arg_to_byte(token[2 + label]);
-	if (token[3 + label])
-		byte_code->arg2 = arg_to_byte(token[3 + label]);
+	// byte_code->arg1 = arg_to_byte(token[1 + label]);
+	// if (token[2 + label])
+	// 	byte_code->arg2 = arg_to_byte(token[2 + label]);
+	// if (token[3 + label])
+	// 	byte_code->arg2 = arg_to_byte(token[3 + label]);
 	byte_code->next = NULL;
+	return (byte_code);
 }
