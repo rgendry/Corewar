@@ -14,10 +14,16 @@
 
 void ft_translation(t_champ *champ)
 {
-    if ((champ->fd_byte = open("byte_code", O_CREAT,O_WRONLY)) == -1)
-        ft_error();
     ft_magic_header(champ, -1);
+<<<<<<< HEAD
     //ft_printf("%s - %d", champ->byte_code, ft_strlen((char*)champ->byte_code));
     // ft_name_to_byte(champ, -1);
     ft_assembly(champ); //тут будет сборка всех частей в общую строку байт кода
 }
+=======
+    ft_assembly(champ);
+    if ((champ->fd_byte = open("byte_code", O_WRONLY, O_CREAT)) == -1)
+        ft_error(); // in the end
+    write(champ->fd_byte, champ->byte_code, ft_strlen(champ->byte_code));
+}
+>>>>>>> 22878d7a7ca2f1e56f52775f930cb3d9a53d2fbc

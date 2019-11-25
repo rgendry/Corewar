@@ -22,7 +22,9 @@ FLAGS = -Wall -Wextra -Werror
 ASM = asm
 SRC_ASM_NAME = main.c \
 			   parse.c \
-			   complementary.c \
+			   complementary1.c \
+			   errors.c \
+			   cleaning.c \
 			   check_name.c \
 			   check_comment.c \
 			   ft_strndup.c \

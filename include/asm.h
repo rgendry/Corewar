@@ -41,14 +41,14 @@ typedef struct              s_name
 {
     char                    *name;
     int                     len_name;
-    int                     f_multi_lines_name;  // флаг для многострочного имя
+    int                     f_multi_lines_name;
 }                           t_name;
 
 typedef struct              s_com
 {
     char                    *comment;
     int                     len_com;
-    int                     f_multi_lines_com; // флаг для многострочного коммента
+    int                     f_multi_lines_com;
 }                           t_com;
 
 typedef struct              s_champ
@@ -62,9 +62,12 @@ typedef struct              s_champ
     struct s_label          *labels;
     int                     fd_byte;
     char                    *byte_code;
-    unsigned char           *m_header;
+    char                    *m_header;
+    char                    *four_zero_bytes;
+    char                    *file_name_cor;
 }                           t_champ;
 
+/* separate function */
 char	*ft_strndup(const char *s1, size_t n);
 int		ft_lennum(int num);
 char	*ft_itoa_hex(long long int n, char sym);
@@ -73,20 +76,25 @@ void	ft_putnbr_hex_fd(int n, int fd);
 
 /* parse */
 void ft_parse(t_champ *champ, int i);
-void ft_check_file_name(char *name);
+void ft_check_file_name(t_champ *champ, char *name);
 
 /* complementary */
-void ft_usage();
-void ft_syntax_error(t_champ *champ);
-void ft_error();
 void ft_initialization(t_champ *champ);
 void ft_print_matrix(char **matrix); // will need to delete this function
-void ft_clear_everything(t_champ *champ, int i);
 int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD);
 int is_emptystr(char *str);
 int is_comment(char *str);
-void ft_errors(t_champ *champ);
+
+/* cleaning */
+void free_nodes(t_label **nodes);
 void free_arr(char ***arr);
+void ft_clear_everything(t_champ *champ, int i);
+
+/* errors */
+void ft_usage();
+void ft_syntax_error(t_champ *champ);
+void ft_error();
+void ft_errors(t_champ *champ);
 
 /* check_name */
 void ft_parse_name(t_champ *champ, char *str);
@@ -95,6 +103,7 @@ void ft_parse_name(t_champ *champ, char *str);
 void ft_parse_com(t_champ *champ, char *str);
 
 
+/* check instr */
 int		check_arg_type(char *str);
 void	check_opertaions(t_champ *champ, char *str);
 int	check_type2(char **token, int label);

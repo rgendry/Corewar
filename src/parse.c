@@ -12,13 +12,18 @@
 
 #include "asm.h"
 
-void ft_check_file_name(char *name)
+void ft_check_file_name(t_champ *champ, char *name)
 {
     int len;
+    char *tmp;
 
     len = ft_strlen(name);
     if (name[len - 1] != 's' || name[len - 2] != '.')
         ft_usage();
+    champ->file_name_cor = ft_strndup(name, len - 1);
+    tmp = champ->file_name_cor;
+    champ->file_name_cor = ft_strjoin(champ->file_name_cor, "cor");
+    ft_strdel(&tmp);
 }
 
 void ft_check_str(t_champ *champ, char *str)
@@ -43,6 +48,4 @@ void ft_parse(t_champ *champ, int i)
         ft_check_str(champ, champ->file[i]);
     }
     ft_errors(champ);
-    ft_printf("NAME - %s\n", champ->name->name);
-    ft_printf("COMM - %s\n", champ->com->comment);
 }

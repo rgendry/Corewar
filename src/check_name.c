@@ -86,6 +86,21 @@ void ft_flag_one(t_champ *champ, char *str, int i, char *name)
     }
 }
 
+void ft_add_zeros(t_champ *champ, int len)
+{
+    char *zeros;
+    char *tmp;
+
+    if (len == PROG_NAME_LENGTH)
+        return;
+    if (!(zeros = ft_memalloc(PROG_NAME_LENGTH - len)))
+        ft_error();
+    tmp = champ->name->name;
+    champ->name->name = ft_strjoin(champ->name->name, zeros);
+    ft_strdel(&tmp);
+    ft_strdel(&zeros);
+}
+
 void ft_parse_name(t_champ *champ, char *str)
 {
     if (champ->name->f_multi_lines_name == -1)
@@ -94,4 +109,6 @@ void ft_parse_name(t_champ *champ, char *str)
         ft_flag_one(champ, str, 0, NULL);
     if (ft_strlen(champ->name->name) >= PROG_NAME_LENGTH)
         ft_syntax_error(champ);
+    else
+        ft_add_zeros(champ, champ->name->len_name);
 }
