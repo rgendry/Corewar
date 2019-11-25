@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/21 18:18:26 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/22 14:26:01 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,23 @@ int		check_operation_type(t_champ *champ, char *str, char **token, int label)
 		return (2);
 	if (check_label(str))
 		return (add_label(&(champ->labels), create_label(str)));
-	if (ft_strstr(str, "live") || ft_strstr(str, "zjmp")
-		|| ft_strstr(str, "fork") || ft_strstr(str, "lfork"))
+	if (!ft_strcmp(str, "live") || !ft_strcmp(str, "zjmp")
+		|| !ft_strcmp(str, "fork") || !ft_strcmp(str, "lfork"))
 		return (check_type2(token, label));
-	if (ft_strstr(str, "ldi") || ft_strstr(str, "lldi"))
+	if (!ft_strcmp(str, "ldi") || !ft_strcmp(str, "lldi"))
 		return (check_type7(token, label));
-	if (ft_strstr(str, "ld") || ft_strstr(str, "lld"))
+	if (!ft_strcmp(str, "ld") || !ft_strcmp(str, "lld"))
 		return (check_type3(token, label));
-	if (ft_strstr(str, "sti"))
+	if (!ft_strcmp(str, "sti"))
 		return (check_type8(token, label));
-	if (ft_strstr(str, "st"))
+	if (!ft_strcmp(str, "st"))
 		return (check_type4(token, label));
-	if (ft_strstr(str, "add") || ft_strstr(str, "sub"))
+	if (!ft_strcmp(str, "add") || !ft_strcmp(str, "sub"))
 		return (check_type5(token, label));
-	if (ft_strstr(str, "and") || ft_strstr(str, "or")
-		|| ft_strstr(str, "xor"))
+	if (!ft_strcmp(str, "and") || !ft_strcmp(str, "or")
+		|| !ft_strcmp(str, "xor"))
 		return (check_type6(token, label));
-	if (ft_strstr(str, "aff"))
+	if (!ft_strcmp(str, "aff"))
 		return (check_type9(token, label));
 	return (0);
 }

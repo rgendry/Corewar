@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   translation.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/13 14:07:55 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/11/25 15:48:44 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
 
 void ft_translation(t_champ *champ)
 {

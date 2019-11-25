@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/21 16:51:52 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 15:44:21 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include "get_next_line.h"
 # include "ft_printf.h"
 # include "op.h"
+
+typedef struct          s_instr
+{
+    char                instr;
+    char                type;
+    char                *arg1;
+    char                *arg2;
+    char                *arg3;
+    struct s_instruct   *next;
+}                       t_instr;
 
 typedef struct  s_label
 {
