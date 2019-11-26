@@ -26,6 +26,23 @@ void ft_check_file_name(t_champ *champ, char *name)
     ft_strdel(&tmp);
 }
 
+void	add_token(t_tokens **head, t_tokens *new)
+{
+    t_tokens	*next;
+
+    if (!new)
+        return ;
+    next = *head;
+    if (next)
+    {
+        while (next->next)
+            next = next->next;
+        next->next = new;
+    }
+    else
+        *head = new;
+}
+
 void ft_check_str(t_champ *champ, char *str)
 {
     if (is_comment(str))
@@ -35,7 +52,7 @@ void ft_check_str(t_champ *champ, char *str)
     else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com == 1)
         ft_parse_com(champ,str);
     else if (champ->name->name && champ->com->comment)
-        check_opertaions(champ, str);
+        add_token(&champ->string, check_operations(champ, str));
     else
         ft_errors(champ);
 }

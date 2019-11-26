@@ -6,13 +6,13 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 16:27:07 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/26 13:41:53 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	add_instr(t_instr **head, t_instr *new)
+int	add_instr(t_instr **head, t_instr *new)
 {
 	t_instr	*next;
 
@@ -27,19 +27,21 @@ void	add_instr(t_instr **head, t_instr *new)
 	}
 	else
 		*head = new;
+	return (new->weight);
 }
 
-void	ft_cycle(t_champ *champ, int i)
+void	ft_cycle(t_champ *champ)
 {
-	t_instr	*byte_code;
-	char	*newstr;
-	char	**token;
+    int label;
+    t_tokens    *head;
 
-    while (champ->file[i])
+    head = champ->string;
+    while (head)
     {
-        newstr = spaces(champ->file[i], 0, 0);
-		token = ft_strsplit(newstr, ',');
-		add_instr(&byte_code, instruction_to_byte(token, check_label(token[0])));
-		i++;
+        label = 0;
+        if (is_label(head->token[0]))
+            label = 1;
+        add_instr(&champ->byte_code, instruction_to_byte(champ, head->token, label)); // сега тут
+        head = head->next;
     }
 }

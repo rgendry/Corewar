@@ -29,6 +29,25 @@ void free_nodes(t_label **nodes)
     *nodes = NULL;
 }
 
+void free_instr(t_instr **intr)
+{
+    t_instr *node;
+    t_instr *next;
+
+    node = *intr;
+    while (node)
+    {
+        next = node->next;
+        ft_strdel(&(node->arg1));
+        ft_strdel(&(node->arg2));
+        ft_strdel(&(node->arg3));
+        node->next = NULL;
+        free(node);
+        node = next;
+    }
+    *intr = NULL;
+}
+
 void free_arr(char ***arr)
 {
     int i;
@@ -44,10 +63,27 @@ void free_arr(char ***arr)
     *arr = NULL;
 }
 
+void ft_free_tokens(t_champ *champ)
+{
+    t_tokens *head;
+    t_tokens *next;
+
+    head = champ->string;
+    while (head)
+    {
+        next = head->next;
+        free_arr(&head->token);
+        head->next = NULL;
+        free(head);
+        head = next;
+    }
+}
+
 void ft_clear_everything(t_champ *champ, int i)
 {
     while (champ->file[++i])
         free(champ->file[i]);
+    ft_free_tokens(champ);
     free(champ->file);
     ft_strdel(&champ->name->name);
     ft_strdel(&champ->com->comment);
@@ -55,8 +91,8 @@ void ft_clear_everything(t_champ *champ, int i)
     free(champ->com);
     free_nodes(&(champ->labels));
     ft_strdel(&champ->file_name_cor);
-    ft_strdel(&champ->byte_code);
+    ft_strdel(&champ->byte_code_all);
     ft_strdel(&champ->m_header);
     ft_strdel(&champ->four_zero_bytes);
-
+    free_instr(&champ->byte_code);
 }

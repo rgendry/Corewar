@@ -34,6 +34,24 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
     close(fd);
 //    ft_print_matrix(champ->file);
 }
+//
+//void    print_strings(t_champ *champ)
+//{
+//    int i;
+//
+//    i = 0;
+//    while (champ->string)
+//    {
+//        while (champ->string->token[i])
+//        {
+//            ft_printf("%s - ", champ->string->token[i]);
+//            i++;
+//        }
+//        i = 0;
+//        ft_printf("\n");
+//        champ->string = champ->string->next;
+//    }
+//}
 
 int main(int argc, char **argv) {
     t_champ champ;
@@ -44,6 +62,7 @@ int main(int argc, char **argv) {
     ft_initialization(&champ);
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, -1);
+ //   print_strings(&champ);
     ft_translation(&champ);
     ft_clear_everything(&champ, -1);
     return (0); // in the end will need to chang on exit

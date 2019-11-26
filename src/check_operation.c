@@ -16,7 +16,7 @@ int		check_operation_type(t_champ *champ, char *str, char **token, int label)
 {
 	if (str[0] == COMMENT_CHAR || str[0] == ALT_COMMENT_CHAR)
 		return (2);
-	if (check_label(str))
+	if (is_label(str))
 		return (add_label(&(champ->labels), create_label(str)));
 	if (!ft_strcmp(str, "live") || !ft_strcmp(str, "zjmp")
 		|| !ft_strcmp(str, "fork") || !ft_strcmp(str, "lfork"))
@@ -43,7 +43,7 @@ char	*spaces(char *str, int i, int j)
 {
 	char	*new;
 
-	if (!(new = (char *)malloc(sizeof(char) * (ft_strlen(str) * 2))))
+	if (!(new = ft_memalloc(ft_strlen(str) * 2)))
 		return (NULL);
 	while (str[i] != '\0')
 	{
@@ -67,23 +67,25 @@ char	*spaces(char *str, int i, int j)
 	return (new);
 }
 
-void	check_opertaions(t_champ *champ, char *str)
+t_tokens	*check_operations(t_champ *champ, char *str)
 {
 	int		type;
 	char	*newstr;
-	char	**token;
+	t_tokens    *new;
 
+	new = malloc(sizeof(t_tokens));
 	if (champ->start_instr == 0)
 	    champ->start_instr = champ->num_lines_file;
 	if (is_emptystr(str))
-		return ;
+		return (NULL);
 	newstr = spaces(str, 0, 0);
-	token = ft_strsplit(newstr, ',');
-	type = check_operation_type(champ, token[0], token, 0);
-	if (type == 1 && token[1])
-		type = check_operation_type(champ, token[1], token, 1);
+	new->token = ft_strsplit(newstr, ',');
+	type = check_operation_type(champ, new->token[0], new->token, 0);
+	if (type == 1 && new->token[1])
+		type = check_operation_type(champ, new->token[1], new->token, 1);
 	if (type < 1)
 		ft_syntax_error(champ);
-    free_arr(&token);
+	new->next = NULL;
     ft_strdel(&newstr);
+    return (new);
 }

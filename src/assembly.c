@@ -16,12 +16,12 @@ void ft_assembly(t_champ *champ)
 {
     char *tmp;
 
-    champ->byte_code = ft_strjoin((char*)champ->m_header, champ->name->name);
-    tmp = champ->byte_code;
-    champ->byte_code = ft_strjoin(champ->byte_code, champ->four_zero_bytes);
+    champ->byte_code_all = ft_strjoin((char*)champ->m_header, champ->name->name);
+    tmp = champ->byte_code_all;
+    champ->byte_code_all = ft_strjoin(champ->byte_code_all, champ->four_zero_bytes);
     ft_strdel(&tmp);
-    tmp = champ->byte_code;
-    champ->byte_code = ft_strjoin(champ->byte_code, champ->com->comment);
+    tmp = champ->byte_code_all;
+    champ->byte_code_all = ft_strjoin(champ->byte_code_all, champ->com->comment);
     ft_strdel(&tmp);
   //  ft_printf("%s\n", champ->byte_code);
 

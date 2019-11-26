@@ -6,13 +6,13 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:54:11 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/18 17:09:02 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/25 18:32:46 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		check_label(char *str)
+int		is_label(char *str)
 {
 	int i;
 
