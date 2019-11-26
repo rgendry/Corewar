@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 19:07:42 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/26 13:41:21 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ char	*arg_to_byte(t_champ *champ, char *str, char type)
 			return (dir_to_byte(champ, str, 2));
 		ft_error();
 	}
-	// if (check_arg_type(str) == 3)
-	// 	return (indir_to_byte(champ, str));
+	if (check_arg_type(str) == 3)
+		return (indir_to_byte(champ, str));
 	ft_error();
 	return (NULL);
 }

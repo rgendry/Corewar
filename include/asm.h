@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 19:07:49 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/26 13:40:33 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,6 @@ void ft_translation(t_champ *champ);
 t_instr	*instruction_to_byte(t_champ *champ, char **token, int label);
 char	*reg_to_byte(char *str);
 char	*dir_to_byte(t_champ *champ, char *str, int type);
-//char	*indir_to_byte(t_champ *champ, char *str);
+char	*indir_to_byte(t_champ *champ, char *str);
 
 #endif
