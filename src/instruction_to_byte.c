@@ -62,7 +62,7 @@ char	arg_type(char **token, int label)
 	return (res);
 }
 
-// char	*arg_to_byte(char *str)
+// char	*arg_to_byte(char *str) 
 // {
 // 	char	arg[4];
 // 	return (arg);
