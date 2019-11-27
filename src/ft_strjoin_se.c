@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin_se.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/11/25 17:14:36 by rgendry           #+#    #+#             */
+/*   Updated: 2019/11/27 17:17:46 by rgendry          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+# include "asm.h"
 
-# include "asm.h "
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_se(char const *s1, char const *s2)
 {
     int		i;
     char	*str;

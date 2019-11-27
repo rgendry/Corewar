@@ -6,7 +6,7 @@
 #    By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/04 18:20:25 by rgendry           #+#    #+#              #
-#    Updated: 2019/11/25 17:17:01 by rgendry          ###   ########.fr        #
+#    Updated: 2019/11/27 17:17:12 by rgendry          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRC_ASM_NAME = main.c \
 			   instruction_to_byte.c \
 			   arg_to_byte.c \
 			   exec_to_byte.c \
-			   fd_strjoin_se.c
+			   ft_strjoin_se.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))
