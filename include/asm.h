@@ -74,7 +74,7 @@ typedef struct              s_champ
     char                    *exec_byte;
     int                     fd_byte;
     char                    *byte_code_all;
-    char                    *m_header;
+    unsigned char                    *m_header;
     char                    *four_zero_bytes;
     char                    *file_name_cor;
 }                           t_champ;

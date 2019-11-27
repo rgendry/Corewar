@@ -31,13 +31,13 @@ void ft_magic_header(t_champ *champ, int i)
     int len_m_header;
 
     len_m_header = ft_lennum_hex(COREWAR_EXEC_MAGIC);
-    shift = ft_find_shift(len_m_header);
-    j = len_m_header / 2 == 0 ? len_m_header / 2 : (len_m_header / 2) + 1;
-    if (!(champ->m_header = (char*)malloc(sizeof(char) * j)))
+    shift = 0; //ft_find_shift(len_m_header);
+    j = len_m_header % 2 == 0 ? len_m_header / 2 : (len_m_header / 2) + 1;
+    if (!(champ->m_header = ft_memalloc(4)))
         ft_error();
-    while (++i < j)
+    while (j)
     {
-        champ->m_header[i] = (COREWAR_EXEC_MAGIC >> shift) & 255;
-        shift -= 8;
+        champ->m_header[j--] = (COREWAR_EXEC_MAGIC >> shift) & 255;
+        shift += 8;
     }
 }
