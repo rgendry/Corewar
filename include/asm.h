@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/26 13:40:33 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/27 17:15:28 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ char	*reg_to_byte(char *str);
 char	*dir_to_byte(t_champ *champ, char *str, int type);
 char	*indir_to_byte(t_champ *champ, char *str);
 
-
+char	*ft_strjoin_se(char const *s1, char const *s2);
 
 void ft_exec_to_byte(t_champ *champ);
 

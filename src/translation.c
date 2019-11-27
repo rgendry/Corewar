@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/25 16:17:26 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/27 17:18:59 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void ft_translation(t_champ *champ)
     ft_printf("%s - %d", champ->m_header, ft_strlen((char*)champ->m_header));
     // ft_name_to_byte(champ, -1);
     ft_exec_to_byte(champ);
-    ft_assembly(champ); //тут будет сборка всех частей в общую строку байт кода
+    //ft_assembly(champ); //тут будет сборка всех частей в общую строку байт кода
 
 
     //    if ((champ->fd_byte = open("byte_code", O_CREAT,O_WRONLY)) == -1)
