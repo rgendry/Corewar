@@ -101,7 +101,7 @@ void ft_counter_weight(t_champ *champ)
 void ft_translation(t_champ *champ)
 {
 
-    ft_magic_header(champ, -1);
+    ft_magic_header(champ);
     ft_counter_weight(champ);
     //print_labels(champ);
     ft_cycle(champ);

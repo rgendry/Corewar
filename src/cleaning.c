@@ -94,5 +94,6 @@ void ft_clear_everything(t_champ *champ, int i)
     ft_strdel(&champ->byte_code_all);
     ft_strdel(&champ->m_header);
     ft_strdel(&champ->four_zero_bytes);
+    ft_strdel(&champ->exec_byte);
     free_instr(&champ->byte_code);
 }

@@ -74,7 +74,7 @@ typedef struct              s_champ
     char                    *exec_byte;
     int                     fd_byte;
     char                    *byte_code_all;
-    unsigned char                    *m_header;
+    char                    *m_header;
     char                    *four_zero_bytes;
     char                    *file_name_cor;
 }                           t_champ;
@@ -134,7 +134,7 @@ t_label	*create_label(char	*data);
 int	    add_label(t_label **head, t_label *new);
 
 /* magic_header_to_byte */
-void ft_magic_header(t_champ *champ, int i);
+void ft_magic_header(t_champ *champ);
 
 /* assembly */
 void ft_assembly(t_champ *champ);

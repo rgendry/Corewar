@@ -24,7 +24,7 @@ int ft_find_shift(int len_m_header)
         return (0);
 }
 
-void ft_magic_header(t_champ *champ, int i)
+void ft_magic_header(t_champ *champ)
 {
     int shift;
     int j;
