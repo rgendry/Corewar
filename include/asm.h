@@ -63,7 +63,6 @@ typedef struct              s_com
 typedef struct              s_champ
 {
     int                     all_weight;
-    int                     start_instr;
     char                    **file;
     int                     len_file;
     int                     num_lines_file;
@@ -72,6 +71,7 @@ typedef struct              s_champ
     struct s_name           *name;
     struct s_label          *labels;
     struct s_tokens         *string;
+    char                    *exec_byte;
     int                     fd_byte;
     char                    *byte_code_all;
     char                    *m_header;
@@ -147,5 +147,9 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label);
 char	*reg_to_byte(char *str);
 char	*dir_to_byte(t_champ *champ, char *str, int type);
 char	*indir_to_byte(t_champ *champ, char *str);
+
+
+
+void ft_exec_to_byte(t_champ *champ);
 
 #endif

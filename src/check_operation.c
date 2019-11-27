@@ -45,7 +45,7 @@ char	*spaces(char *str, int i, int j)
 
 	if (!(new = ft_memalloc(ft_strlen(str) * 2)))
 		return (NULL);
-	while (str[i] != '\0')
+	while (str[i] != '\0' && str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR)
 	{
 		if (str[i] == ' ' || str[i] == '\t')
 			new[j] = ',';
@@ -74,8 +74,6 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 	t_tokens    *new;
 
 	new = malloc(sizeof(t_tokens));
-	if (champ->start_instr == 0)
-	    champ->start_instr = champ->num_lines_file;
 	if (is_emptystr(str))
 		return (NULL);
 	newstr = spaces(str, 0, 0);

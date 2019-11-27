@@ -17,7 +17,7 @@ int	add_instr(t_instr **head, t_instr *new)
 	t_instr	*next;
 
 	if (!new)
-		ft_error();
+		return (0);
 	next = *head;
 	if (next)
 	{
@@ -41,7 +41,7 @@ void	ft_cycle(t_champ *champ)
         label = 0;
         if (is_label(head->token[0]))
             label = 1;
-        add_instr(&champ->byte_code, instruction_to_byte(champ, head->token, label)); // сега тут
+        champ->all_weight += add_instr(&champ->byte_code, instruction_to_byte(champ, head->token, label));
         head = head->next;
     }
 }

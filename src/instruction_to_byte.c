@@ -91,38 +91,45 @@ char	*arg_to_byte(t_champ *champ, char *str, char type, t_instr *byte_code)
 	ft_error();
 	return (NULL);
 }
-//
-//void ft_count_weight(t_instr *byte_code)
-//{
-//    byte_code->weight = 0;
-//
-//    if (byte_code->instr)
-//        byte_code->weight++;
-//    if (byte_code->type)
-//        byte_code->weight += 2;
-//    byte_code->weight += byte_code->w_arg;
-//}
-//
+
+void ft_count_current_weight(t_instr *byte_code)
+{
+    byte_code->weight = 0;
+
+    if (byte_code->instr)
+        byte_code->weight++;
+    if (byte_code->type)
+        byte_code->weight += 2;
+    byte_code->weight += byte_code->w_arg;
+}
+
 t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 {
 	t_instr	*byte_code;
 
 	byte_code = NULL;
+    if (label && !token[1])
+        return (NULL);
 	if (!(byte_code = (t_instr *) malloc (sizeof(t_instr))))
 		ft_error();
 	byte_code->instr = operation_type(token[0 + label]);
 	byte_code->type = 0;
 	byte_code->w_arg = 0;
-	byte_code->weight = 0;
 	if (byte_code->instr != 1 && byte_code->instr != 9 &&
 		byte_code->instr != 12 && byte_code->instr != 15)
 		byte_code->type = arg_type(token, label);
-	byte_code->arg1 = arg_to_byte(champ, token[1 + label], byte_code->instr, byte_code);
-	if (token[2 + label] && !is_comment(token[2 + label]))
-		byte_code->arg2 = arg_to_byte(champ, token[2 + label], byte_code->instr, byte_code);
-	if (token[3 + label] && !is_comment(token[3 + label])) // и вроде тут  в  is_comment
-		byte_code->arg2 = arg_to_byte(champ, token[3 + label], byte_code->instr, byte_code);
+	int i = 1;
+	while (!is_emptystr(token[i + label]))
+    {
+	    if (i == 1)
+            byte_code->arg1 = arg_to_byte(champ, token[1 + label], byte_code->instr, byte_code);
+	    if (i == 2)
+            byte_code->arg2 = arg_to_byte(champ, token[2 + label], byte_code->instr, byte_code);
+	    if (i == 3)
+            byte_code->arg3 = arg_to_byte(champ, token[3 + label], byte_code->instr, byte_code);
+	    i++;
+    }
 	byte_code->next = NULL;
-	//ft_count_weight(&byte_code);
+    ft_count_current_weight(byte_code);
 	return (byte_code);
 }

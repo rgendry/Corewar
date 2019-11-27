@@ -88,7 +88,7 @@ char	*indir_to_byte(t_champ *champ, char *str)
 	if (!(res = (char *)malloc (sizeof(char) * 5)))
 		ft_error();
 	if (str[0] == ':')
-		value = find_label(champ, str);
+		value = champ->all_weight - find_label(champ, str);
 	else
 		value = ft_atoi(str);
 	while (i < 5)

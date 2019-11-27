@@ -40,7 +40,9 @@ SRC_ASM_NAME = main.c \
 			   ft_lennum_hex.c \
 			   cycle.c \
 			   instruction_to_byte.c \
-			   arg_to_byte.c
+			   arg_to_byte.c \
+			   exec_to_byte.c \
+			   fd_strjoin_se.c
 
 OBJ_ASM_NAME = $(SRC_ASM_NAME:.c=.o);
 SRC_ASM = $(addprefix $(OBJDIR)/, $(SRC_ASM_NAME))
