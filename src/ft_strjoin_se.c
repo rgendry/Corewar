@@ -12,9 +12,27 @@
 
 # include "asm.h"
 
-char	*ft_strjoin_se(char const *s1, char const *s2)
+
+char	*ft_memjoin(char *s1, char *s2, int len1, int len2)
 {
-    int		i;
+    int len;
+    char *newstr;
+    char *begin;
+    len = len1 + len2;
+    newstr = (char*)malloc(sizeof(char) * len);
+    begin = newstr;
+    if (s1 == NULL && s2 == NULL)
+        return (ft_strnew(0));
+    else if (len1 == 0)
+        return (ft_strdup(s2)); // не сработает стрдап
+    else if (len2 == 0)
+        return (ft_strdup(s1));
+    while (len1--)
+        *newstr++ = *s1++;
+    while (len2--)
+        *newstr++ = *s2++;
+    return (begin);
+ /*   int		i;
     char	*str;
 
     if (s1 == NULL && s2 == NULL)
@@ -38,5 +56,5 @@ char	*ft_strjoin_se(char const *s1, char const *s2)
         s2++;
     }
     str[i] = '\0';
-    return (str);
+    return (str);*/
 }

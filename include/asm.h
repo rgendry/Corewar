@@ -152,4 +152,7 @@ char	*ft_strjoin_se(char const *s1, char const *s2);
 
 void ft_exec_to_byte(t_champ *champ);
 
+
+char	*ft_memjoin(char *s1, char *s2, int len1, int len2);
+
 #endif
