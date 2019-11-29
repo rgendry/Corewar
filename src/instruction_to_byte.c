@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 16:25:33 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/29 15:51:49 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,36 @@ char	arg_type(char **token, int label)
 	return (res);
 }
 
-char	*arg_to_byte(t_champ *champ, char *str, char type, t_instr *byte_code)
+t_arg	*arg_to_byte(t_champ *champ, char *str, char type)
 {
+    t_arg *arg;
+
+	if (!(arg = (t_arg *)malloc(sizeof(t_arg))))
+		ft_error();
 	if (check_arg_type(str) == 1)
     {
-	    byte_code->w_arg++;
-        return (reg_to_byte(str));
+	    arg->weight = 1;
+        arg->byte_code = reg_to_byte(str);
     }
 	if (check_arg_type(str) == 2)
 	{
 		if ((type >= 1 && type <= 8) || type == 13 || type == 16)
 		{
-            byte_code->w_arg += 4;
-            return (dir_to_byte(champ, str, 4));
+            arg->weight = 4;
+            arg->byte_code = dir_to_byte(champ, str, 4);
         }
 		if ((type >= 9 && type <= 12) || type == 14 || type == 15)
         {
-            byte_code->w_arg += 2;
-            return (dir_to_byte(champ, str, 2));
+            arg->weight = 2;
+            arg->byte_code = dir_to_byte(champ, str, 2);
         }
-		ft_error();
 	}
 	if (check_arg_type(str) == 3)
     {
-        byte_code->w_arg += 2;
-	    return (indir_to_byte(champ, str));
+        arg->weight = 2;
+	    arg->byte_code = indir_to_byte(champ, str);
     }
-	ft_error();
-	return (NULL);
+	return (arg);
 }
 
 void ft_count_current_weight(t_instr *byte_code)
@@ -100,7 +102,13 @@ void ft_count_current_weight(t_instr *byte_code)
         byte_code->weight++;
     if (byte_code->type)
         byte_code->weight += 2;
-    byte_code->weight += byte_code->w_arg;
+	if (byte_code->arg1)
+		byte_code->weight += byte_code->arg1->weight;
+	if (byte_code->arg2)
+		byte_code->weight += byte_code->arg2->weight;
+	if (byte_code->arg3)
+		byte_code->weight += byte_code->arg3->weight;
+    //byte_code->weight += byte_code->w_arg;
 }
 
 t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
@@ -114,7 +122,10 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 		ft_error();
 	byte_code->instr = operation_type(token[0 + label]);
 	byte_code->type = 0;
-	byte_code->w_arg = 0;
+	byte_code->arg1 = NULL;
+	byte_code->arg2 = NULL;
+	byte_code->arg3 = NULL;
+	//byte_code->w_arg = 0;
 	if (byte_code->instr != 1 && byte_code->instr != 9 &&
 		byte_code->instr != 12 && byte_code->instr != 15)
 		byte_code->type = arg_type(token, label);
@@ -122,11 +133,11 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 	while (!is_emptystr(token[i + label]))
     {
 	    if (i == 1)
-            byte_code->arg1 = arg_to_byte(champ, token[1 + label], byte_code->instr, byte_code);
+            byte_code->arg1 = arg_to_byte(champ, token[1 + label], byte_code->instr);
 	    if (i == 2)
-            byte_code->arg2 = arg_to_byte(champ, token[2 + label], byte_code->instr, byte_code);
+            byte_code->arg2 = arg_to_byte(champ, token[2 + label], byte_code->instr);
 	    if (i == 3)
-            byte_code->arg3 = arg_to_byte(champ, token[3 + label], byte_code->instr, byte_code);
+            byte_code->arg3 = arg_to_byte(champ, token[3 + label], byte_code->instr);
 	    i++;
     }
 	byte_code->next = NULL;

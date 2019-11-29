@@ -55,16 +55,16 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
 
 int main(int argc, char **argv) {
     t_champ champ;
-    char *str1;
+   /* char *str1;
     char *str2;
     char *strnew;
 
-    /*str1 = (char*)malloc(sizeof(char) * 3);
-    str2 = (char*)malloc(sizeof(char) * 3);*/
+    *//*str1 = (char*)malloc(sizeof(char) * 3);
+    str2 = (char*)malloc(sizeof(char) * 3);*//*
     str1 = "abc";
     str2 = "def";
     strnew = ft_memjoin(str1, str2, 3, 3);
-    ft_printf("%s - %s - %s", str1, str2, strnew);
+    ft_printf("%s - %s - %s", str1, str2, strnew);*/
     if (argc != 2)
         ft_usage();
     ft_check_file_name(&champ, argv[1]);
@@ -74,6 +74,6 @@ int main(int argc, char **argv) {
  //   print_strings(&champ);
     ft_translation(&champ);
     ft_clear_everything(&champ, -1);
-    ft_strdel(&strnew);
+   // ft_strdel(&strnew);
     return (0); // in the end will need to chang on exit
 }

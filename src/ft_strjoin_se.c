@@ -23,9 +23,9 @@ char	*ft_memjoin(char *s1, char *s2, int len1, int len2)
     begin = newstr;
     if (s1 == NULL && s2 == NULL)
         return (ft_strnew(0));
-    else if (len1 == 0)
+    else if (!s1)
         return (ft_strdup(s2)); // не сработает стрдап
-    else if (len2 == 0)
+    else if (!s2)
         return (ft_strdup(s1));
     while (len1--)
         *newstr++ = *s1++;

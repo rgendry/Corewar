@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/27 17:15:28 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/11/29 15:47:52 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,20 @@
 # include "ft_printf.h"
 # include "op.h"
 
+typedef struct          s_arg
+{
+    char                *byte_code;
+    int                 weight;
+}                       t_arg;
+
 typedef struct          s_instr
 {
     char                instr;
     char                type;
-    char                *arg1;
-    char                *arg2;
-    char                *arg3;
-    int                 w_arg;
+    struct s_arg        *arg1;
+    struct s_arg        *arg2;
+    struct s_arg        *arg3;
+    //int                 w_arg;
     int                 weight;
     struct s_instr      *next;
 }                       t_instr;
