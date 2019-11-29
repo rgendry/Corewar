@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complementary.c                                    :+:      :+:    :+:   */
+/*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/07 13:41:22 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/11/29 15:49:39 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ void free_instr(t_instr **intr)
     while (node)
     {
         next = node->next;
-        ft_strdel(&(node->arg1));
-        ft_strdel(&(node->arg2));
-        ft_strdel(&(node->arg3));
+        ft_strdel(&(node->arg1->byte_code));
+        free(node->arg1);
+        ft_strdel(&(node->arg2->byte_code));
+        free(node->arg2);
+        ft_strdel(&(node->arg3->byte_code));
+        free(node->arg3);
         node->next = NULL;
         free(node);
         node = next;
