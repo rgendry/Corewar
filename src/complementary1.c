@@ -62,13 +62,14 @@ void    ft_initialization(t_champ *champ)
     champ->labels = NULL;
     champ->file = NULL;
     champ->string = NULL;
-    champ->exec_byte = NULL;
+    champ->instr_byte = NULL;
     champ->len_file = 0;
     champ->num_lines_file = 0;
     champ->com->f_multi_lines_com = -1;
     champ->name->f_multi_lines_name = -1;
     champ->name->len_name = 0;
     champ->all_weight = 0;
+    champ->instr_byte_len = 0;
 }
 
 int is_comment(char *str)

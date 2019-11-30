@@ -77,7 +77,8 @@ typedef struct              s_champ
     struct s_name           *name;
     struct s_label          *labels;
     struct s_tokens         *string;
-    char                    *exec_byte;
+    char                    *instr_byte;
+    int                     instr_byte_len;
     int                     fd_byte;
     char                    *byte_code_all;
     char                    *m_header;
@@ -143,7 +144,7 @@ int	    add_label(t_label **head, t_label *new);
 void ft_magic_header(t_champ *champ);
 
 /* assembly */
-void ft_assembly(t_champ *champ);
+int  ft_assembly(t_champ *champ);
 
 /* translation */
 void	ft_cycle(t_champ *champ);
