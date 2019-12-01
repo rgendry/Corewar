@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/27 17:18:59 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 16:41:02 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int ft_count_weight(char **token, int label)
     weight = 1;
     type = operation_type(token[0 + label]);
     if (type != 1 && type != 9 && type != 12 && type != 15)
-        weight += 2;
+        weight++;
     while (token[i + label])
     {
         weight += ft_arg_weight(token[i + label], type);
@@ -88,15 +88,18 @@ void ft_counter_weight(t_champ *champ)
     }
 }
 
-//void    print_labels(t_champ *champ)
-//{
-//    while (champ->labels)
-//    {
-//        ft_printf("%s ", champ->labels->name);
-//        ft_printf("%d\n", champ->labels->place);
-//        champ->labels = champ->labels->next;
-//    }
-//}
+// void    print_labels(t_champ *champ)
+// {
+//     t_label *head;
+
+//     head = champ->labels;
+//     while (head)
+//     {
+//         ft_printf("%s ", head->name);
+//         ft_printf("%d\n", head->place);
+//         head = head->next;
+//     }
+// }
 
 void ft_translation(t_champ *champ)
 {

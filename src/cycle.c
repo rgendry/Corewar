@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/26 13:41:53 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 16:41:09 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_cycle(t_champ *champ)
     t_tokens    *head;
 
     head = champ->string;
+	champ->all_weight = 0;
     while (head)
     {
         label = 0;

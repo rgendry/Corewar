@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/29 15:51:49 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 14:53:20 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void ft_count_current_weight(t_instr *byte_code)
     if (byte_code->instr)
         byte_code->weight++;
     if (byte_code->type)
-        byte_code->weight += 2;
+        byte_code->weight++;
 	if (byte_code->arg1)
 		byte_code->weight += byte_code->arg1->weight;
 	if (byte_code->arg2)

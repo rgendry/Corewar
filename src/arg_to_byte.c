@@ -6,27 +6,30 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:14:36 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/29 15:44:29 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 16:55:54 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		find_label(t_champ *champ, char *str) //  Тут надо разобраться, по идее должно возвращаться не само число,
-{												// а разница между текущим положением и этим числом
-	while (champ->labels)						// но наверное лучше это считать не в этой функции :)
+int		find_label(t_champ *champ, char *str)
+{
+	t_label	*head;
+
+	head = champ->labels;
+	while (head)
 	{
 		if (str[0] == '%')
 		{
-			if (!(ft_strncmp(str + 2, champ->labels->name, ft_strlen(champ->labels->name - 1))))
-				return (champ->labels->place);
+			if (!(ft_strncmp(str + 2, head->name, (ft_strlen(head->name) - 1))))
+				return (head->place);
 		}
 		if (str[0] == ':')
 		{
-			if (!(ft_strncmp(++str, champ->labels->name, ft_strlen(champ->labels->name - 1))))
-				return (champ->labels->place);
+			if (!(ft_strncmp(++str, head->name, (ft_strlen(head->name) - 1))))
+				return (head->place);
 		}
-		champ->labels = champ->labels->next;
+		head = head->next;
 	}
 	ft_error();
 	return (0);
@@ -39,9 +42,9 @@ char	*dir_type4(int value)
 	if (!(res = (char *)malloc(sizeof(char) * 4)))
 		ft_error();
 	res[0] = 0;
-	res[0] = 0;
-	res[0] = 0;
-	res[4] = value;
+	res[1] = 0;
+	res[2] = 0;
+	res[3] = value;
 	return (res);
 }
 
@@ -51,7 +54,10 @@ char	*dir_type2(int value)
 
 	if (!(res = (char *)malloc(sizeof(char) * 2)))
 		ft_error();
-	res[0] = 0;
+	if (value < 0)
+		res[0] = -1;
+	else
+		res[0] = 0;
 	res[1] = value;
 	return (res);
 }
@@ -61,7 +67,7 @@ char	*dir_to_byte(t_champ *champ, char *str, int type)
 	int		value;
 
 	if (str[0] == '%' && str[1] == ':')
-		value = find_label(champ, str);
+		value = find_label(champ, str) - champ->all_weight;
 	else
 		value = ft_atoi(++str);
 	if (type == 2)
@@ -92,7 +98,7 @@ char	*indir_to_byte(t_champ *champ, char *str)
 	if (!(res = (char *)malloc (sizeof(char) * 2)))
 		ft_error();
 	if (str[0] == ':')
-		value = champ->all_weight - find_label(champ, str);
+		value = find_label(champ, str); //champ->all_weight - find_label(champ, str);
 	else
 		value = ft_atoi(str);
 	res[0] = 0;
