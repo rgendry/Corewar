@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 16:57:29 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:45:33 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
     close(fd);
 //    ft_print_matrix(champ->file);
 }
-//
-//void    print_strings(t_champ *champ)
-//{
-//    int i;
-//
-//    i = 0;
-//    while (champ->string)
-//    {
-//        while (champ->string->token[i])
-//        {
-//            ft_printf("%s - ", champ->string->token[i]);
-//            i++;
-//        }
-//        i = 0;
-//        ft_printf("\n");
-//        champ->string = champ->string->next;
-//    }
-//}
 
 int main(int argc, char **argv) {
     t_champ champ;
@@ -71,9 +53,7 @@ int main(int argc, char **argv) {
     ft_initialization(&champ);
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, -1);
- //   print_strings(&champ);
     ft_translation(&champ);
     ft_clear_everything(&champ, -1);
-   // ft_strdel(&strnew);
     return (0); // in the end will need to chang on exit
 }

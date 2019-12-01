@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 14:53:20 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:57:42 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,51 +64,50 @@ char	arg_type(char **token, int label)
 
 t_arg	*arg_to_byte(t_champ *champ, char *str, char type)
 {
-    t_arg *arg;
+	t_arg	*arg;
 
 	if (!(arg = (t_arg *)malloc(sizeof(t_arg))))
 		ft_error();
 	if (check_arg_type(str) == 1)
-    {
-	    arg->weight = 1;
-        arg->byte_code = reg_to_byte(str);
-    }
+	{
+		arg->weight = 1;
+		arg->byte_code = reg_to_byte(str);
+	}
 	if (check_arg_type(str) == 2)
 	{
 		if ((type >= 1 && type <= 8) || type == 13 || type == 16)
 		{
-            arg->weight = 4;
-            arg->byte_code = dir_to_byte(champ, str, 4);
-        }
+			arg->weight = 4;
+			arg->byte_code = dir_to_byte(champ, str, 4);
+		}
 		if ((type >= 9 && type <= 12) || type == 14 || type == 15)
-        {
-            arg->weight = 2;
-            arg->byte_code = dir_to_byte(champ, str, 2);
-        }
+		{
+			arg->weight = 2;
+			arg->byte_code = dir_to_byte(champ, str, 2);
+		}
 	}
 	if (check_arg_type(str) == 3)
-    {
-        arg->weight = 2;
-	    arg->byte_code = indir_to_byte(champ, str);
-    }
+	{
+		arg->weight = 2;
+		arg->byte_code = indir_to_byte(champ, str);
+	}
 	return (arg);
 }
 
 void ft_count_current_weight(t_instr *byte_code)
 {
-    byte_code->weight = 0;
+	byte_code->weight = 0;
 
-    if (byte_code->instr)
-        byte_code->weight++;
-    if (byte_code->type)
-        byte_code->weight++;
+	if (byte_code->instr)
+		byte_code->weight++;
+	if (byte_code->type)
+		byte_code->weight++;
 	if (byte_code->arg1)
 		byte_code->weight += byte_code->arg1->weight;
 	if (byte_code->arg2)
 		byte_code->weight += byte_code->arg2->weight;
 	if (byte_code->arg3)
 		byte_code->weight += byte_code->arg3->weight;
-    //byte_code->weight += byte_code->w_arg;
 }
 
 t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
@@ -116,8 +115,8 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 	t_instr	*byte_code;
 
 	byte_code = NULL;
-    if (label && !token[1])
-        return (NULL);
+	if (label && !token[1])
+		return (NULL);
 	if (!(byte_code = (t_instr *) malloc (sizeof(t_instr))))
 		ft_error();
 	byte_code->instr = operation_type(token[0 + label]);
@@ -125,7 +124,6 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 	byte_code->arg1 = NULL;
 	byte_code->arg2 = NULL;
 	byte_code->arg3 = NULL;
-	//byte_code->w_arg = 0;
 	if (byte_code->instr != 1 && byte_code->instr != 9 &&
 		byte_code->instr != 12 && byte_code->instr != 15)
 		byte_code->type = arg_type(token, label);

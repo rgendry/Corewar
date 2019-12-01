@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:54:11 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/25 18:32:46 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:55:00 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		is_label(char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	if (i > 1 && str[i - 1] == ':')
+	if (i > 1 && str[i - 1] == LABEL_CHAR)
 		return (1);
 	return (0);
 }

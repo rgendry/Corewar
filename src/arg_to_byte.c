@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:14:36 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 16:55:54 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:52:30 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int		find_label(t_champ *champ, char *str)
 	head = champ->labels;
 	while (head)
 	{
-		if (str[0] == '%')
+		if (str[0] == DIRECT_CHAR)
 		{
 			if (!(ft_strncmp(str + 2, head->name, (ft_strlen(head->name) - 1))))
 				return (head->place);
 		}
-		if (str[0] == ':')
+		if (str[0] == LABEL_CHAR)
 		{
 			if (!(ft_strncmp(++str, head->name, (ft_strlen(head->name) - 1))))
 				return (head->place);
@@ -66,7 +66,7 @@ char	*dir_to_byte(t_champ *champ, char *str, int type)
 {
 	int		value;
 
-	if (str[0] == '%' && str[1] == ':')
+	if (str[0] == DIRECT_CHAR && str[1] == LABEL_CHAR)
 		value = find_label(champ, str) - champ->all_weight;
 	else
 		value = ft_atoi(++str);
@@ -97,7 +97,7 @@ char	*indir_to_byte(t_champ *champ, char *str)
 
 	if (!(res = (char *)malloc (sizeof(char) * 2)))
 		ft_error();
-	if (str[0] == ':')
+	if (str[0] == LABEL_CHAR)
 		value = find_label(champ, str); //champ->all_weight - find_label(champ, str);
 	else
 		value = ft_atoi(str);

@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/01 16:41:02 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 19:16:21 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void ft_translation(t_champ *champ)
 
      if (!(fd = open("byte_code", O_WRONLY | O_CREAT, 0666)))
         ft_error();
-     write(fd, champ->byte_code_all, all_len);
-     ft_printf("successfuly created\n");
+    //write(fd, champ->instr_byte, champ->instr_byte_len);
+    write(fd, champ->byte_code_all, all_len);
+     ft_printf("successfully created\n");
 }
