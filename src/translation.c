@@ -101,6 +101,7 @@ void ft_counter_weight(t_champ *champ)
 void ft_translation(t_champ *champ)
 {
     int all_len;
+    int fd;
 
     ft_magic_header(champ);
     ft_counter_weight(champ);
@@ -108,8 +109,8 @@ void ft_translation(t_champ *champ)
     ft_exec_to_byte(champ); // тут будем записывать в отдельную строку (чтобы 2,5к байт каждый раз не переписывать)
     all_len = ft_assembly(champ); //а уже тут будет сборка всех частей в общую строку байт кода
 
-     if ((champ->fd_byte = open("byte_code", O_RDWR | O_TRUNC | O_CREAT | S_IWRITE | S_IREAD)) == -1)
+     if (!(fd = open("byte_code", O_WRONLY | O_CREAT, 0666)))
         ft_error();
-     write(champ->fd_byte, champ->byte_code_all, all_len);
-
+     write(fd, champ->byte_code_all, all_len);
+     ft_printf("successfuly created\n");
 }

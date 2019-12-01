@@ -28,7 +28,7 @@ int  ft_assembly(t_champ *champ)
 //    champ->byte_code_all = ft_memjoin(champ->byte_code_all, champ->four_zero_bytes, 2184, 4);
 //    ft_strdel(&tmp);
     tmp =  champ->byte_code_all;
-    champ->byte_code_all = ft_memjoin(champ->byte_code_all, champ->instr_byte, 2188, champ->instr_byte_len);
+    champ->byte_code_all = ft_memjoin(champ->byte_code_all, champ->instr_byte, 2184, champ->instr_byte_len);
     ft_strdel(&tmp);
     return (2184 + champ->instr_byte_len);
 }
