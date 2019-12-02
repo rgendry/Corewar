@@ -21,9 +21,10 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
     if (fd == -1)
         ft_usage();
     buf = ft_memalloc(100);
-    while ((ret = read(fd, buf, 100)) > 0)
+    while ((ret = read(fd, buf, 99)) > 0)
     {
         tmp = str;
+        buf[ret] = '\0';
         str = ft_strjoin(str, buf);
         ft_strdel(&tmp);
     }
@@ -39,10 +40,8 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
     }*/
     champ->len_file = ft_strlen(str);
     champ->file_str = str;
-    //champ->file = ft_strsplit(str, '\n');
-    //ft_strdel(&str);
+    ft_strdel(&buf);
     close(fd);
-//    ft_print_matrix(champ->file);
 }
 //
 //void    print_strings(t_champ *champ)
@@ -72,9 +71,8 @@ int main(int argc, char **argv) {
     ft_initialization(&champ);
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
     ft_parse(&champ, 0);
- //   print_strings(&champ);
     ft_translation(&champ);
-    ft_clear_everything(&champ, -1);
+    ft_clear_everything(&champ);
    // ft_strdel(&strnew);
     return (0); // in the end will need to chang on exit
 }

@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/29 15:49:39 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:54:28 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,9 @@ void ft_free_tokens(t_champ *champ)
     }
 }
 
-void ft_clear_everything(t_champ *champ, int i)
+void ft_clear_everything(t_champ *champ)
 {
-    while (champ->file[++i])
-        free(champ->file[i]);
     ft_free_tokens(champ);
-    free(champ->file);
     ft_strdel(&champ->name->name);
     ft_strdel(&champ->com->comment);
     free(champ->name);

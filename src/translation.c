@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/27 17:18:59 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 19:16:21 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int ft_count_weight(char **token, int label)
     weight = 1;
     type = operation_type(token[0 + label]);
     if (type != 1 && type != 9 && type != 12 && type != 15)
-        weight += 2;
+        weight++;
     while (token[i + label])
     {
         weight += ft_arg_weight(token[i + label], type);
@@ -88,15 +88,34 @@ void ft_counter_weight(t_champ *champ)
     }
 }
 
-//void    print_labels(t_champ *champ)
-//{
-//    while (champ->labels)
-//    {
-//        ft_printf("%s ", champ->labels->name);
-//        ft_printf("%d\n", champ->labels->place);
-//        champ->labels = champ->labels->next;
-//    }
-//}
+// void    print_labels(t_champ *champ)
+// {
+//     t_label *head;
+
+//     head = champ->labels;
+//     while (head)
+//     {
+//         ft_printf("%s ", head->name);
+//         ft_printf("%d\n", head->place);
+//         head = head->next;
+//     }
+// }
+
+void ft_make_exec_size(t_champ *champ)
+{
+    int j;
+    int i;
+
+    i = 3;
+    j = (champ->all_weight / 255) + 1;
+    if (!(champ->exec_size = ft_memalloc(4)))
+        ft_error();
+    while (j)
+    {
+        champ->exec_size[i--] = champ->all_weight % 255;
+        j--;
+    }
+}
 
 void ft_translation(t_champ *champ)
 {
@@ -107,10 +126,12 @@ void ft_translation(t_champ *champ)
     ft_counter_weight(champ);
     ft_cycle(champ);
     ft_exec_to_byte(champ); // тут будем записывать в отдельную строку (чтобы 2,5к байт каждый раз не переписывать)
+    ft_make_exec_size(champ);
     all_len = ft_assembly(champ); //а уже тут будет сборка всех частей в общую строку байт кода
 
-     if (!(fd = open("byte_code", O_WRONLY | O_CREAT, 0666)))
+     if (!(fd = open(champ->file_name_cor, O_WRONLY | O_CREAT, 0666)))
         ft_error();
-     write(fd, champ->byte_code_all, all_len);
-     ft_printf("successfuly created\n");
+    //write(fd, champ->instr_byte, champ->instr_byte_len);
+    write(fd, champ->byte_code_all, all_len);
+    ft_printf("successfully created\n");
 }

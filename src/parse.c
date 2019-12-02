@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:09 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/18 17:12:03 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:58:36 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,30 @@ void	add_token(t_tokens **head, t_tokens *new)
         *head = new;
 }
 
+void ft_delnl(char *str)
+{
+    int len;
+
+    len = ft_strlen(str);
+    str[len - 1] = '\0';
+
+}
+
 void ft_check_str(t_champ *champ, char *str)
 {
-    /*ft_printf("name - %s\n", champ->name->name);
-    ft_printf("comment - %s\n", champ->com->comment);*/
-    if (is_comment(str) || is_emptystr(str) || *str == '\n')
+     if (is_comment(str) || is_emptystr(str))
         return;
     else if (ft_strstr(str, NAME_CMD_STRING) || champ->name->f_multi_lines_name == 1)
         ft_parse_name(champ, str);
     else if (ft_strstr(str, COMMENT_CMD_STRING) || champ->com->f_multi_lines_com == 1)
         ft_parse_com(champ,str);
+    else if (*str == '\n')
+        return;
     else if (champ->name->name && champ->com->comment)
+    {
+        ft_delnl(str);
         add_token(&champ->string, check_operations(champ, str));
+    }
     else
         ft_errors(champ);
 }
@@ -78,7 +90,7 @@ void ft_parse(t_champ *champ, int end)
     char *tmp;
 
     start = champ->file_str;
-    while (champ->file_str)
+    while (*start != '\0')
     {
         champ->num_lines_file++;
         end = ft_numln(start);
@@ -87,7 +99,6 @@ void ft_parse(t_champ *champ, int end)
         ft_check_str(champ, tmp);
         ft_strdel(&tmp);
     }
+    ft_strdel(&champ->file_str);
     ft_errors(champ);
-    ft_strdel(&start);
-
 }

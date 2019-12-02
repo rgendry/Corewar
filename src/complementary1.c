@@ -12,16 +12,7 @@
 
 #include "asm.h"
 
-void ft_print_matrix(char **matrix)
-{
-    int i;
-
-    i = -1;
-    while (matrix[++i])
-        ft_printf("%s\n", matrix[i]);
-}
-
-int ft_check_cmd_string(t_champ *champ, char *str,int i, char CMD)
+int ft_check_cmd_string(t_champ *champ, char *str, int i, char CMD)
 {
     int len_decl_name;
 
@@ -60,9 +51,10 @@ void    ft_initialization(t_champ *champ)
     champ->name->name = NULL;
     champ->byte_code = NULL;
     champ->labels = NULL;
-    champ->file = NULL;
     champ->file_str = NULL;
     champ->string = NULL;
+    champ->exec_size = NULL;
+    champ->instr_byte = NULL;
     champ->instr_byte = NULL;
     champ->len_file = 0;
     champ->num_lines_file = 0;

@@ -6,13 +6,13 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/22 14:26:01 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 18:44:31 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		check_operation_type(t_champ *champ, char *str, char **token, int label)
+int			check_operation_type(t_champ *champ, char *str, char **token, int label)
 {
 	if (str[0] == COMMENT_CHAR || str[0] == ALT_COMMENT_CHAR)
 		return (2);
@@ -39,7 +39,7 @@ int		check_operation_type(t_champ *champ, char *str, char **token, int label)
 	return (0);
 }
 
-char	*spaces(char *str, int i, int j)
+char		*spaces(char *str, int i, int j)
 {
 	char	*new;
 
@@ -48,17 +48,17 @@ char	*spaces(char *str, int i, int j)
 	while (str[i] != '\0' && str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR)
 	{
 		if (str[i] == ' ' || str[i] == '\t')
-			new[j] = ',';
-		else if (str[i] == '%' && new[j - 1] != ',')
+			new[j] = SEPARATOR_CHAR;
+		else if (str[i] == DIRECT_CHAR && new[j - 1] != SEPARATOR_CHAR)
 		{
-			new[j] = ',';
+			new[j] = SEPARATOR_CHAR;
 			i--;
 		}
 		else
 		{
 			new[j] = str[i];
-			if (new[j] == ':' && new[j - 1] && new[j - 1] != '%' && new[j - 1] != ',')
-				new[++j] = ',';
+			if (new[j] == LABEL_CHAR && new[j - 1] && new[j - 1] != DIRECT_CHAR && new[j - 1] != SEPARATOR_CHAR)
+				new[++j] = SEPARATOR_CHAR;
 		}
 		i++;
 		j++;
@@ -69,21 +69,21 @@ char	*spaces(char *str, int i, int j)
 
 t_tokens	*check_operations(t_champ *champ, char *str)
 {
-	int		type;
-	char	*newstr;
-	t_tokens    *new;
+	int			type;
+	char		*newstr;
+	t_tokens	*new;
 
 	new = malloc(sizeof(t_tokens));
 	if (is_emptystr(str))
 		return (NULL);
 	newstr = spaces(str, 0, 0);
-	new->token = ft_strsplit(newstr, ',');
+	new->token = ft_strsplit(newstr, SEPARATOR_CHAR);
 	type = check_operation_type(champ, new->token[0], new->token, 0);
 	if (type == 1 && new->token[1])
 		type = check_operation_type(champ, new->token[1], new->token, 1);
 	if (type < 1)
 		ft_syntax_error(champ);
 	new->next = NULL;
-    ft_strdel(&newstr);
-    return (new);
+	ft_strdel(&newstr);
+	return (new);
 }

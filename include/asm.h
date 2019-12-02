@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/11/29 15:47:52 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/01 17:27:35 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ typedef struct              s_com
 typedef struct              s_champ
 {
     int                     all_weight;
-    char                    **file;
     char                    *file_str;
     int                     len_file;
+    char                    *exec_size;
     int                     num_lines_file;
     struct s_com            *com;
     struct s_instr          *byte_code;
@@ -108,7 +108,7 @@ int	arr_len(char **arr);
 /* cleaning */
 void free_nodes(t_label **nodes);
 void free_arr(char ***arr);
-void ft_clear_everything(t_champ *champ, int i);
+void ft_clear_everything(t_champ *champ);
 
 /* errors */
 void ft_usage();
