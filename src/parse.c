@@ -45,7 +45,9 @@ void	add_token(t_tokens **head, t_tokens *new)
 
 void ft_check_str(t_champ *champ, char *str)
 {
-    if (is_comment(str))
+    /*ft_printf("name - %s\n", champ->name->name);
+    ft_printf("comment - %s\n", champ->com->comment);*/
+    if (is_comment(str) || is_emptystr(str) || *str == '\n')
         return;
     else if (ft_strstr(str, NAME_CMD_STRING) || champ->name->f_multi_lines_name == 1)
         ft_parse_name(champ, str);
@@ -57,12 +59,35 @@ void ft_check_str(t_champ *champ, char *str)
         ft_errors(champ);
 }
 
-void ft_parse(t_champ *champ, int i)
+int ft_numln(char *str)
 {
-    while (champ->file[++i])
+    int i;
+
+    i = -1;
+    while(str[++i])
+    {
+        if (str[i] == '\n')
+            return (i + 1);
+    }
+    return (0);
+}
+
+void ft_parse(t_champ *champ, int end)
+{
+    char *start;
+    char *tmp;
+
+    start = champ->file_str;
+    while (champ->file_str)
     {
         champ->num_lines_file++;
-        ft_check_str(champ, champ->file[i]);
+        end = ft_numln(start);
+        tmp = ft_strndup(start, end);
+        start += end;
+        ft_check_str(champ, tmp);
+        ft_strdel(&tmp);
     }
     ft_errors(champ);
+    ft_strdel(&start);
+
 }

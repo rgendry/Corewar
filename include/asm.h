@@ -55,14 +55,14 @@ typedef struct              s_tokens
 typedef struct              s_name
 {
     char                    *name;
-    int                     len_name;
+    int                     cur_len;
     int                     f_multi_lines_name;
 }                           t_name;
 
 typedef struct              s_com
 {
     char                    *comment;
-    int                     len_com;
+    int                     cur_len;
     int                     f_multi_lines_com;
 }                           t_com;
 
@@ -70,6 +70,7 @@ typedef struct              s_champ
 {
     int                     all_weight;
     char                    **file;
+    char                    *file_str;
     int                     len_file;
     int                     num_lines_file;
     struct s_com            *com;

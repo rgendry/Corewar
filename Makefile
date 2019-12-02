@@ -25,8 +25,8 @@ SRC_ASM_NAME = main.c \
 			   complementary1.c \
 			   errors.c \
 			   cleaning.c \
-			   check_name.c \
-			   check_comment.c \
+			   new_check_name.c \
+			   new_check_comment.c \
 			   ft_strndup.c \
 			   check_args.c \
 			   check_operation.c \

@@ -15,10 +15,19 @@
 void ft_reader(t_champ *champ, int fd, char *str, char *buf)
 {
     char *tmp;
+    int ret;
 
+    ret  = 0;
     if (fd == -1)
         ft_usage();
-    while ((get_next_line(fd, &buf)) > 0)
+    buf = ft_memalloc(100);
+    while ((ret = read(fd, buf, 100)) > 0)
+    {
+        tmp = str;
+        str = ft_strjoin(str, buf);
+        ft_strdel(&tmp);
+    }
+/*    while ((get_next_line(fd, &buf)) > 0)
     {
         tmp = str;
         str = ft_strjoin(str, buf);
@@ -27,10 +36,11 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
         str = ft_strjoin(str, "\n");
         ft_strdel(&tmp);
         ft_strdel(&buf);
-    }
+    }*/
     champ->len_file = ft_strlen(str);
-    champ->file = ft_strsplit(str, '\n');
-    ft_strdel(&str);
+    champ->file_str = str;
+    //champ->file = ft_strsplit(str, '\n');
+    //ft_strdel(&str);
     close(fd);
 //    ft_print_matrix(champ->file);
 }
@@ -55,22 +65,13 @@ void ft_reader(t_champ *champ, int fd, char *str, char *buf)
 
 int main(int argc, char **argv) {
     t_champ champ;
-   /* char *str1;
-    char *str2;
-    char *strnew;
 
-    *//*str1 = (char*)malloc(sizeof(char) * 3);
-    str2 = (char*)malloc(sizeof(char) * 3);*//*
-    str1 = "abc";
-    str2 = "def";
-    strnew = ft_memjoin(str1, str2, 3, 3);
-    ft_printf("%s - %s - %s", str1, str2, strnew);*/
     if (argc != 2)
         ft_usage();
     ft_check_file_name(&champ, argv[1]);
     ft_initialization(&champ);
     ft_reader(&champ, open(argv[1], O_RDONLY), NULL, NULL);
-    ft_parse(&champ, -1);
+    ft_parse(&champ, 0);
  //   print_strings(&champ);
     ft_translation(&champ);
     ft_clear_everything(&champ, -1);
