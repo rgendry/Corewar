@@ -15,7 +15,7 @@
 int  ft_assembly(t_champ *champ)
 {
     char *tmp;
-    ft_printf("%s\n", champ->file_name_cor);
+
     champ->byte_code_all = ft_memjoin(champ->m_header, champ->name->name, 4, 128);
     tmp = champ->byte_code_all;
     champ->byte_code_all = ft_memjoin(champ->byte_code_all, champ->four_zero_bytes, 132, 4);

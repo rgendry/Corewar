@@ -113,6 +113,7 @@ void ft_make_exec_size(t_champ *champ)
     while (j)
     {
         champ->exec_size[i--] = champ->all_weight % 255;
+        champ->all_weight /= 255;
         j--;
     }
 }
