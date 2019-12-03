@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:14:36 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 18:52:30 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/03 19:23:00 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,18 @@ char	*dir_type4(int value)
 {
 	char	*res;
 
-	if (!(res = (char *)malloc(sizeof(char) * 4)))
+	if (!(res = ft_memalloc(4)))
 		ft_error();
-	res[0] = 0;
-	res[1] = 0;
-	res[2] = 0;
-	res[3] = value;
+	res[3] = value & 255;
+	res[2] = (value >> 8 ) & 255;
+	res[1] = (value >> 16) & 255;
+	if (value < 0)
+		{
+			res[0] = -1;
+			ft_printf ("%d\n", value);
+		}
+	else
+		res[0] = (value >> 24) & 255;
 	return (res);
 }
 
@@ -54,11 +60,11 @@ char	*dir_type2(int value)
 
 	if (!(res = (char *)malloc(sizeof(char) * 2)))
 		ft_error();
+	res[1] = value & 255;
 	if (value < 0)
 		res[0] = -1;
 	else
-		res[0] = 0;
-	res[1] = value;
+		res[0] = (value >> 8) & 255;
 	return (res);
 }
 
@@ -92,7 +98,7 @@ char	*reg_to_byte(char *str)
 
 char	*indir_to_byte(t_champ *champ, char *str)
 {
-	int		value;
+	int				value;
 	char	*res;
 
 	if (!(res = (char *)malloc (sizeof(char) * 2)))
@@ -101,7 +107,10 @@ char	*indir_to_byte(t_champ *champ, char *str)
 		value = find_label(champ, str); //champ->all_weight - find_label(champ, str);
 	else
 		value = ft_atoi(str);
-	res[0] = 0;
-	res[1] = value;
+	if (value < 0)
+		res[0] = (!((value >> 8) & 255)) | 32768;
+	else
+		res[0] = (value >> 8) & 255;
+	res[1] = value & 255;
 	return (res);
 }

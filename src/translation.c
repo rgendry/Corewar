@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/01 19:16:21 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/03 17:33:20 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,19 +103,6 @@ void ft_counter_weight(t_champ *champ)
 
 void ft_make_exec_size(t_champ *champ)
 {
-/*    int j;
-    int i;
-
-    i = 3;
-    j = (champ->all_weight / 255) + 1;
-    if (!(champ->exec_size = ft_memalloc(4)))
-        ft_error();
-    while (j)
-    {
-        champ->exec_size[i--] = champ->all_weight % 255;
-        champ->all_weight /= 255;
-        j--;
-    }*/
     int shift;
     int j;
 
