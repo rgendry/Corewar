@@ -103,7 +103,7 @@ void ft_counter_weight(t_champ *champ)
 
 void ft_make_exec_size(t_champ *champ)
 {
-    int j;
+/*    int j;
     int i;
 
     i = 3;
@@ -115,6 +115,18 @@ void ft_make_exec_size(t_champ *champ)
         champ->exec_size[i--] = champ->all_weight % 255;
         champ->all_weight /= 255;
         j--;
+    }*/
+    int shift;
+    int j;
+
+    shift = 0;
+    j = 3;
+    if (!(champ->exec_size = ft_memalloc(4)))
+        ft_error();
+    while (j)
+    {
+        champ->exec_size[j--] = (champ->all_weight >> shift) & 255;
+        shift += 8;
     }
 }
 
