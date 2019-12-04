@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/03 17:33:20 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/04 19:23:50 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void ft_translation(t_champ *champ)
     ft_magic_header(champ);
     ft_counter_weight(champ);
     ft_cycle(champ);
+    //print_labels(champ);
     ft_exec_to_byte(champ); // тут будем записывать в отдельную строку (чтобы 2,5к байт каждый раз не переписывать)
     ft_make_exec_size(champ);
     all_len = ft_assembly(champ); //а уже тут будет сборка всех частей в общую строку байт кода

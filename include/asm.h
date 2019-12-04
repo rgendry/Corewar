@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/03 19:22:49 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/04 17:14:06 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,17 @@
 
 typedef struct          s_arg
 {
-    char                *byte_code;
+    unsigned char       *byte_code;
     int                 weight;
 }                       t_arg;
 
 typedef struct          s_instr
 {
-    char                instr;
-    char                type;
+    unsigned char       instr;
+    unsigned char       type;
     struct s_arg        *arg1;
     struct s_arg        *arg2;
     struct s_arg        *arg3;
-    //int                 w_arg;
     int                 weight;
     struct s_instr      *next;
 }                       t_instr;
@@ -49,19 +48,18 @@ typedef struct              s_tokens
 {
     char                    **token;
     struct s_tokens          *next;
-//    int                     label;
 }                           t_tokens;
 
 typedef struct              s_name
 {
-    char                    *name;
+    unsigned char           *name;
     int                     cur_len;
     int                     f_multi_lines_name;
 }                           t_name;
 
 typedef struct              s_com
 {
-    char                    *comment;
+    unsigned char           *comment;
     int                     cur_len;
     int                     f_multi_lines_com;
 }                           t_com;
@@ -71,18 +69,18 @@ typedef struct              s_champ
     int                     all_weight;
     char                    *file_str;
     int                     len_file;
-    char                    *exec_size;
+    unsigned char           *exec_size;
     int                     num_lines_file;
     struct s_com            *com;
     struct s_instr          *byte_code;
     struct s_name           *name;
     struct s_label          *labels;
     struct s_tokens         *string;
-    char                    *instr_byte;
+    unsigned char           *instr_byte;
     int                     instr_byte_len;
-    char                    *byte_code_all;
-    char                    *m_header;
-    char                    *four_zero_bytes;
+    unsigned char           *byte_code_all;
+    unsigned char           *m_header;
+    unsigned char           *four_zero_bytes;
     char                    *file_name_cor;
 }                           t_champ;
 
@@ -149,17 +147,15 @@ int  ft_assembly(t_champ *champ);
 /* translation */
 void	ft_cycle(t_champ *champ);
 void ft_translation(t_champ *champ);
-char	operation_type(char *str);
+unsigned char	operation_type(char *str);
 t_instr	*instruction_to_byte(t_champ *champ, char **token, int label);
-char	*reg_to_byte(char *str);
-char	*dir_to_byte(t_champ *champ, char *str, int type);
-char	*indir_to_byte(t_champ *champ, char *str);
-
-char	*ft_strjoin_se(char const *s1, char const *s2);
+unsigned char	*reg_to_byte(char *str);
+unsigned char	*dir_to_byte(t_champ *champ, char *str, int type);
+unsigned char	*indir_to_byte(t_champ *champ, char *str);
 
 void ft_exec_to_byte(t_champ *champ);
 
 
-char	*ft_memjoin(char *s1, char *s2, int len1, int len2);
+unsigned char	*ft_memjoin(unsigned char *s1, unsigned char *s2, int len1, int len2);
 
 #endif

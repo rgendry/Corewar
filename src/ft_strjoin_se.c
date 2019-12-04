@@ -6,24 +6,23 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:14:36 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 18:55:38 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/04 17:33:46 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "asm.h"
 
-
-char	*ft_memjoin(char *s1, char *s2, int len1, int len2)
+unsigned char	*ft_memjoin(unsigned char *s1, unsigned char *s2, int len1, int len2)
 {
     int len;
-    char *newstr;
-    char *begin;
+    unsigned char *newstr;
+    unsigned char *begin;
 
     len = len1 + len2;
-    newstr = (char*)malloc(sizeof(char) * len);
+    newstr = ft_memalloc(len);
     begin = newstr;
     if (s1 == NULL && s2 == NULL)
-        return (ft_strnew(0));
+        return ((unsigned char *)ft_strnew(0));
     else if (s1 == NULL)
         ft_memcpy(newstr, s2, len2);
     else if (s2 == NULL)

@@ -6,15 +6,15 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 18:57:42 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/04 17:01:36 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char	operation_type(char *str)
+unsigned char	operation_type(char *str)
 {
-	char	op;
+	unsigned char	op;
 
 	op = 0;
 	!ft_strcmp(str, "live") ? op = 1 : op;
@@ -38,10 +38,10 @@ char	operation_type(char *str)
 	return (op);
 }
 
-char	arg_type(char **token, int label)
+unsigned char	arg_type(char **token, int label)
 {
 	int		increment;
-	char	res;
+	unsigned char	res;
 
 	res = 0;
 	if (token[1 + label])
