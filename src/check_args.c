@@ -15,7 +15,7 @@
 int		check_reg(char *str)
 {
 	str++;
-	if (ft_atoi(str) >= 1 && ft_atoi(str) <= 16)
+	if (ft_atoi(str) >= 1 && ft_atoi(str) <= REG_NUMBER)
 		return (1);
 	return (0);
 }

@@ -14,7 +14,7 @@
 
 int			check_operation_type(t_champ *champ, char *str, char **token, int label)
 {
-	if (str[0] == COMMENT_CHAR || str[0] == ALT_COMMENT_CHAR)
+	if (str && (str[0] == COMMENT_CHAR || str[0] == ALT_COMMENT_CHAR))
 		return (2);
 	if (is_label(str))
 		return (add_label(&(champ->labels), create_label(str)));
@@ -77,7 +77,12 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 	if (is_emptystr(str))
 		return (NULL);
 	newstr = spaces(str, 0, 0);
-	new->token = ft_strsplit(newstr, SEPARATOR_CHAR);
+    new->token = ft_strsplit(newstr, SEPARATOR_CHAR);
+	if (!new->token[0])
+    {
+        ft_strdel(&newstr);
+        return (NULL);
+    }
 	type = check_operation_type(champ, new->token[0], new->token, 0);
 	if (type == 1 && new->token[1])
 		type = check_operation_type(champ, new->token[1], new->token, 1);

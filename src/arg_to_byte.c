@@ -105,7 +105,7 @@ unsigned char	*indir_to_byte(t_champ *champ, char *str)
 	if (!(res = ft_memalloc(2)))
 		ft_error();
 	if (str[0] == LABEL_CHAR)
-		value = find_label(champ, str);
+		value = find_label(champ, str) - champ->all_weight;
 	else
 		value = ft_atoi(str);
 	res[0] = (value >> 8) & 255;
