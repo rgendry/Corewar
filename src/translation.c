@@ -134,5 +134,5 @@ void ft_translation(t_champ *champ)
         ft_error();
     //write(fd, champ->instr_byte, champ->instr_byte_len);
     write(fd, champ->byte_code_all, all_len);
-    ft_printf("successfully created\n");
+    ft_printf("Writing output program to %s\n", champ->file_name_cor);
 }
