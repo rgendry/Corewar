@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/04 17:27:09 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:41:54 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,10 @@ void free_instr(t_instr **intr)
     while (node)
     {
         next = node->next;
-        // ft_strdel(&((char *)node->arg1->byte_code));
         free(node->arg1->byte_code);
         free(node->arg1);
-        // ft_strdel((char *)&(node->arg2->byte_code));
         free(node->arg2->byte_code);
         free(node->arg2);
-        // ft_strdel((char *)&(node->arg3->byte_code));
         free(node->arg3->byte_code);
         free(node->arg3);
         node->next = NULL;
@@ -85,9 +82,28 @@ void ft_free_tokens(t_champ *champ)
     }
 }
 
+// void    ft_free_byte(t_champ *champ)
+// {
+//     t_instr *head;
+//     t_instr *next;
+
+//     head = champ->byte_code;
+//     while (head)
+//     {
+//         next = head->next;
+//         free(head->arg1);
+//         free(head->arg2);
+//         free(head->arg3);
+//         head->next = NULL;
+//         free(head);
+//         head = next;
+//     }
+// }
+
 void ft_clear_everything(t_champ *champ)
 {
     ft_free_tokens(champ);
+    free_instr(&(champ->byte_code));
     free(champ->name->name);
     free(champ->com->comment);
     free(champ->name);

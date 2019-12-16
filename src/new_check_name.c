@@ -4,7 +4,7 @@ void ft_create_name(t_champ *champ)
 {
     champ->name->name = ft_memalloc(128);
     if (!(champ->name->name))
-        ft_error();
+        ft_error(champ);
 }
 
 int ft_write_str(t_champ *champ, char *str, int i, int j)

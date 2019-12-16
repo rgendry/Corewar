@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:09 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/01 18:58:36 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/15 17:49:47 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int ft_numln(char *str)
         if (str[i] == '\n')
             return (i + 1);
     }
-    return (0);
+    return (i);
 }
 
 void ft_parse(t_champ *champ, int end)

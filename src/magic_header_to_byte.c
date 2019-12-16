@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   magic_header_to_byte.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 15:31:32 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/15 15:31:34 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:20:35 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void ft_magic_header(t_champ *champ)
     int len_m_header;
 
     len_m_header = ft_lennum_hex(COREWAR_EXEC_MAGIC);
-    shift = 0; //ft_find_shift(len_m_header);
+    shift = 0;
     j = len_m_header % 2 == 0 ? len_m_header / 2 : (len_m_header / 2) + 1;
     if (!(champ->m_header = ft_memalloc(4)))
-        ft_error();
+        ft_error(champ);
     while (j)
     {
         champ->m_header[j--] = (COREWAR_EXEC_MAGIC >> shift) & 255;

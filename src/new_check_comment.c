@@ -4,7 +4,7 @@ void ft_create_com(t_champ *champ)
 {
     champ->com->comment = ft_memalloc(2048);
     if (!(champ->com->comment))
-        ft_error();
+        ft_error(champ);
 }
 
 int ft_write_str_com(t_champ *champ, char *str, int i, int j)
