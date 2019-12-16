@@ -17,7 +17,7 @@ int			check_operation_type(t_champ *champ, char *str, char **token, int label)
 	if (str && (str[0] == COMMENT_CHAR || str[0] == ALT_COMMENT_CHAR))
 		return (2);
 	if (is_label(str))
-		return (add_label(&(champ->labels), create_label(str)));
+		return (add_label(&(champ->labels), create_label(champ, str)));
 	if (!ft_strcmp(str, "live") || !ft_strcmp(str, "zjmp")
 		|| !ft_strcmp(str, "fork") || !ft_strcmp(str, "lfork"))
 		return (check_type2(token, label));
@@ -49,7 +49,7 @@ char		*spaces(char *str, int i, int j)
 	{
 		if (str[i] == ' ' || str[i] == '\t')
 			new[j] = SEPARATOR_CHAR;
-		else if (str[i] == DIRECT_CHAR && new[j - 1] != SEPARATOR_CHAR)
+		else if ((str[i] == DIRECT_CHAR) && new[j - 1] != SEPARATOR_CHAR)
 		{
 			new[j] = SEPARATOR_CHAR;
 			i--;
@@ -73,9 +73,9 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 	char		*newstr;
 	t_tokens	*new;
 
+    if (is_emptystr(str))
+        return (NULL);
 	new = malloc(sizeof(t_tokens));
-	if (is_emptystr(str))
-		return (NULL);
 	newstr = spaces(str, 0, 0);
     new->token = ft_strsplit(newstr, SEPARATOR_CHAR);
 	if (!new->token[0])

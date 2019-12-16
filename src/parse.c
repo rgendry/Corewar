@@ -99,6 +99,8 @@ void ft_parse(t_champ *champ, int end)
         ft_check_str(champ, tmp);
         ft_strdel(&tmp);
     }
+    if (!champ->string)
+        ft_error(champ);
     ft_strdel(&champ->file_str);
     ft_errors(champ);
 }

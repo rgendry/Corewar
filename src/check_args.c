@@ -14,13 +14,14 @@
 
 int		check_reg(char *str)
 {
-	str++;
+    str++;
+/*	str++;
     if (*str == '\0')
     {
         ft_printf("Lexical error \n");
         exit(EXIT_FAILURE);
-    }
-	if (ft_atoi(str) >= 1 && ft_atoi(str) <= REG_NUMBER)
+    }*/
+	if (ft_atoi(str) >= 0 && ft_atoi(str) <= REG_NUMBER)
 		return (1);
 	ft_printf("Lexical error ");
 	exit(EXIT_FAILURE);

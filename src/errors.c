@@ -32,6 +32,13 @@ void ft_too_long_com(t_champ *champ)
     exit (EXIT_FAILURE);
 }
 
+void ft_lex_error(t_champ *champ)
+{
+    ft_printf("Lexical error at line number %d\n", champ->num_lines_file);
+    ft_clear_everything(champ);
+    exit (EXIT_FAILURE);
+}
+
 void ft_syntax_error(t_champ *champ)
 {
     ft_printf("Syntax error at line number %d\n", champ->num_lines_file);

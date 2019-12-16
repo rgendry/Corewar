@@ -24,10 +24,27 @@ int		is_label(char *str)
 	return (0);
 }
 
-t_label	*create_label(char	*data)
+void    check_sym(t_champ *champ, char *data)
+{
+    int i;
+
+    i = 0;
+    while (data[i] != ':')
+    {
+        if (!(ft_strchr(LABEL_CHARS, data[i])))
+            ft_lex_error(champ);
+        i++;
+    }
+    i++;
+    if (data[i])
+        ft_lex_error(champ);
+}
+
+t_label	*create_label(t_champ *champ, char *data)
 {
 	t_label	*new;
 
+	check_sym(champ, data);
 	if (!(new = (t_label *)malloc(sizeof(t_label))))
 		exit(EXIT_FAILURE);
 	new->name = ft_strdup(data);

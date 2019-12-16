@@ -111,6 +111,7 @@ void ft_clear_everything(t_champ *champ);
 /* errors */
 void ft_usage();
 void ft_syntax_error(t_champ *champ);
+void ft_lex_error(t_champ *champ);
 void ft_error(t_champ *champ);
 void ft_errors(t_champ *champ);
 void ft_too_long_com(t_champ *champ);
@@ -139,7 +140,7 @@ int	check_type7(char **token, int label);
 int	check_type8(char **token, int label);
 int	check_type9(char **token, int label);
 int		is_label(char *str);
-t_label	*create_label(char	*data);
+t_label	*create_label(t_champ *champ, char *data);
 int	    add_label(t_label **head, t_label *new);
 
 /* magic_header_to_byte */
