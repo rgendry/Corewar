@@ -6,13 +6,13 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/04 17:01:36 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:29:48 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-unsigned char	operation_type(char *str)
+unsigned char	operation_type(t_champ *champ, char *str)
 {
 	unsigned char	op;
 
@@ -34,7 +34,7 @@ unsigned char	operation_type(char *str)
 	!ft_strcmp(str, "lfork") ? op = 15 : op;
 	!ft_strcmp(str, "aff") ? op = 16 : op;
 	if (op == 0)
-		ft_error();
+		ft_error(champ);
 	return (op);
 }
 
@@ -67,11 +67,11 @@ t_arg	*arg_to_byte(t_champ *champ, char *str, char type)
 	t_arg	*arg;
 
 	if (!(arg = (t_arg *)malloc(sizeof(t_arg))))
-		ft_error();
+		ft_error(champ);
 	if (check_arg_type(str) == 1)
 	{
 		arg->weight = 1;
-		arg->byte_code = reg_to_byte(str);
+		arg->byte_code = reg_to_byte(champ, str);
 	}
 	if (check_arg_type(str) == 2)
 	{
@@ -118,8 +118,8 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 	if (label && !token[1])
 		return (NULL);
 	if (!(byte_code = (t_instr *) malloc (sizeof(t_instr))))
-		ft_error();
-	byte_code->instr = operation_type(token[0 + label]);
+		ft_error(champ);
+	byte_code->instr = operation_type(champ, token[0 + label]);
 	byte_code->type = 0;
 	byte_code->arg1 = NULL;
 	byte_code->arg2 = NULL;

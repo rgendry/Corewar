@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/04 17:14:06 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:29:33 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,18 @@ void ft_clear_everything(t_champ *champ);
 /* errors */
 void ft_usage();
 void ft_syntax_error(t_champ *champ);
-void ft_error();
+void ft_error(t_champ *champ);
 void ft_errors(t_champ *champ);
+void ft_too_long_com(t_champ *champ);
+void ft_too_long_name(t_champ *champ);
 
 /* check_name */
 void ft_parse_name(t_champ *champ, char *str);
 
+
 /* check_comment */
 void ft_parse_com(t_champ *champ, char *str);
+void ft_check_end(t_champ *champ, char *str, int i);
 
 
 /* check instr */
@@ -147,9 +151,9 @@ int  ft_assembly(t_champ *champ);
 /* translation */
 void	ft_cycle(t_champ *champ);
 void ft_translation(t_champ *champ);
-unsigned char	operation_type(char *str);
+unsigned char	operation_type(t_champ *champ, char *str);
 t_instr	*instruction_to_byte(t_champ *champ, char **token, int label);
-unsigned char	*reg_to_byte(char *str);
+unsigned char	*reg_to_byte(t_champ *champ, char *str);
 unsigned char	*dir_to_byte(t_champ *champ, char *str, int type);
 unsigned char	*indir_to_byte(t_champ *champ, char *str);
 

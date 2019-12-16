@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/13 14:07:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/04 19:23:50 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/15 18:29:07 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int ft_arg_weight(char *str, int type)
     return (0);
 }
 
-int ft_count_weight(char **token, int label)
+int ft_count_weight(t_champ *champ, char **token, int label)
 {
     int i;
     int type;
@@ -38,7 +38,7 @@ int ft_count_weight(char **token, int label)
 
     i = 1;
     weight = 1;
-    type = operation_type(token[0 + label]);
+    type = operation_type(champ, token[0 + label]);
     if (type != 1 && type != 9 && type != 12 && type != 15)
         weight++;
     while (token[i + label])
@@ -63,7 +63,7 @@ void	set_label(t_champ *champ, char *str, int place)
         }
         head = head->next;
     }
-    ft_error();
+    ft_error(champ);
 }
 
 
@@ -83,23 +83,10 @@ void ft_counter_weight(t_champ *champ)
             label = 1;
         }
         if (head->token[0 + label] && !is_comment(head->token[0 + label]))
-            champ->all_weight += ft_count_weight(head->token, label);
+            champ->all_weight += ft_count_weight(champ, head->token, label);
         head = head->next;
     }
 }
-
-// void    print_labels(t_champ *champ)
-// {
-//     t_label *head;
-
-//     head = champ->labels;
-//     while (head)
-//     {
-//         ft_printf("%s ", head->name);
-//         ft_printf("%d\n", head->place);
-//         head = head->next;
-//     }
-// }
 
 void ft_make_exec_size(t_champ *champ)
 {
@@ -109,7 +96,7 @@ void ft_make_exec_size(t_champ *champ)
     shift = 0;
     j = 3;
     if (!(champ->exec_size = ft_memalloc(4)))
-        ft_error();
+        ft_error(champ);
     while (j)
     {
         champ->exec_size[j--] = (champ->all_weight >> shift) & 255;
@@ -125,14 +112,11 @@ void ft_translation(t_champ *champ)
     ft_magic_header(champ);
     ft_counter_weight(champ);
     ft_cycle(champ);
-    //print_labels(champ);
-    ft_exec_to_byte(champ); // тут будем записывать в отдельную строку (чтобы 2,5к байт каждый раз не переписывать)
+    ft_exec_to_byte(champ);
     ft_make_exec_size(champ);
-    all_len = ft_assembly(champ); //а уже тут будет сборка всех частей в общую строку байт кода
-
+    all_len = ft_assembly(champ);
      if (!(fd = open(champ->file_name_cor, O_WRONLY | O_CREAT, 0666)))
-        ft_error();
-    //write(fd, champ->instr_byte, champ->instr_byte_len);
+        ft_error(champ);
     write(fd, champ->byte_code_all, all_len);
     ft_printf("Writing output program to %s\n", champ->file_name_cor);
 }

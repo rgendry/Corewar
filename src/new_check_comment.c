@@ -4,24 +4,39 @@ void ft_create_com(t_champ *champ)
 {
     champ->com->comment = ft_memalloc(2048);
     if (!(champ->com->comment))
-        ft_error();
+        ft_error(champ);
+}
+
+void ft_check_end(t_champ *champ, char *str, int i)
+{
+    while (str[i])
+    {
+        if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+            return;
+        else if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
+            ft_error(champ);
+        i++;
+    }
 }
 
 int ft_write_str_com(t_champ *champ, char *str, int i, int j)
 {
     while (str[i] != '\0' && str[i] != '"')
     {
-        if (champ->com->cur_len > 2048)
-            ft_syntax_error(champ);
+        if (champ->com->cur_len >= COMMENT_LENGTH)
+            ft_too_long_com(champ);
         champ->com->comment[j++] = str[i++];
         champ->com->cur_len++;
     }
     if (str[i] == '"')
+    {
         champ->com->f_multi_lines_com = 0;
+        ft_check_end(champ, str, i + 1);
+    }
     else
     {
-        if (champ->com->cur_len > 2048)
-            ft_syntax_error(champ);
+        if (champ->com->cur_len > COMMENT_LENGTH)
+            ft_too_long_com(champ);
     }
     return (i);
 }

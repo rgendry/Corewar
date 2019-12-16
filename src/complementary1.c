@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complementary.c                                    :+:      :+:    :+:   */
+/*   complementary1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/11/07 13:41:22 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/12/15 18:17:23 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int is_emptystr(char *str)
 void    ft_initialization(t_champ *champ)
 {
     if (!(champ->com = malloc(sizeof(t_com))) || !(champ->name = malloc(sizeof(t_name))))
-        ft_error();
+        ft_error(champ);
     if (!(champ->four_zero_bytes = ft_memalloc(4)))
-        ft_error();
+        ft_error(champ);
     champ->com->comment = NULL;
     champ->name->name = NULL;
     champ->byte_code = NULL;

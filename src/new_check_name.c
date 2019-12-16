@@ -2,26 +2,29 @@
 
 void ft_create_name(t_champ *champ)
 {
-    champ->name->name = ft_memalloc(128);
+    champ->name->name = ft_memalloc(PROG_NAME_LENGTH);
     if (!(champ->name->name))
-        ft_error();
+        ft_error(champ);
 }
 
 int ft_write_str(t_champ *champ, char *str, int i, int j)
 {
     while (str[i] != '\0' && str[i] != '"')
     {
-        if (champ->name->cur_len > 128)
-            ft_syntax_error(champ);
+        if (champ->name->cur_len >= PROG_NAME_LENGTH)
+            ft_too_long_name(champ);
         champ->name->name[j++] = str[i++];
         champ->name->cur_len++;
     }
     if (str[i] == '"')
+    {
         champ->name->f_multi_lines_name = 0;
+        ft_check_end(champ, str, i + 1);
+    }
     else
     {
-        if (champ->name->cur_len > 128)
-            ft_syntax_error(champ);
+        if (champ->name->cur_len > PROG_NAME_LENGTH)
+            ft_too_long_name(champ);
     }
     return (i);
 }
