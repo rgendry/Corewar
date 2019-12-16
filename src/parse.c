@@ -81,7 +81,7 @@ int ft_numln(char *str)
         if (str[i] == '\n')
             return (i + 1);
     }
-    return (0);
+    return (i);
 }
 
 void ft_parse(t_champ *champ, int end)
