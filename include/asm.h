@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:25:26 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/15 18:29:33 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/18 20:58:09 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,14 @@ void ft_parse_name(t_champ *champ, char *str);
 /* check_comment */
 void ft_parse_com(t_champ *champ, char *str);
 void ft_check_end(t_champ *champ, char *str, int i);
+void	ft_create_com(t_champ *champ);
 
 
 /* check instr */
-char	*spaces(char *str, int i, int j);
+char	*spaces(char *str, int i, int j, char *new);
 int		check_arg_type(char *str);
 t_tokens	*check_operations(t_champ *champ, char *str);
-int		check_operation_type(t_champ *champ, char *str, char **token, int label);
+int		check_op_type(t_champ *champ, char *str, char **token, int label);
 int	check_type2(char **token, int label);
 int	check_type3(char **token, int label);
 int	check_type4(char **token, int label);
@@ -142,6 +143,7 @@ int	check_type9(char **token, int label);
 int		is_label(char *str);
 t_label	*create_label(t_champ *champ, char *data);
 int	    add_label(t_label **head, t_label *new);
+int		find_label(t_champ *champ, char *str);
 
 /* magic_header_to_byte */
 void ft_magic_header(t_champ *champ);
@@ -153,7 +155,7 @@ int  ft_assembly(t_champ *champ);
 void	ft_cycle(t_champ *champ);
 void ft_translation(t_champ *champ);
 unsigned char	operation_type(t_champ *champ, char *str);
-t_instr	*instruction_to_byte(t_champ *champ, char **token, int label);
+t_instr			*instruction_to_byte(t_champ *champ, char **token, int label, t_instr *byte_code);
 unsigned char	*reg_to_byte(t_champ *champ, char *str);
 unsigned char	*dir_to_byte(t_champ *champ, char *str, int type);
 unsigned char	*indir_to_byte(t_champ *champ, char *str);
@@ -162,5 +164,9 @@ void ft_exec_to_byte(t_champ *champ);
 
 
 unsigned char	*ft_memjoin(unsigned char *s1, unsigned char *s2, int len1, int len2);
+int		ft_count_weight(t_champ *champ, char **token, int label);
+void	ft_count_current_weight(t_instr *byte_code);
+int		ft_arg_weight(char *str, int type);
+int		ft_numln(char *str);
 
 #endif

@@ -6,34 +6,11 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 17:14:36 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/15 18:10:47 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/18 15:37:28 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-
-int		find_label(t_champ *champ, char *str)
-{
-	t_label	*head;
-	char	*name;
-
-	head = champ->labels;
-	if (str[0] == DIRECT_CHAR)
-		name = ft_strjoin(str + 2, ":");
-	if (str[0] == LABEL_CHAR)
-		name = ft_strjoin(str + 1, ":");
-	while (head)
-	{
-		if (!(ft_strcmp(head->name, name)))
-		{
-			ft_strdel(&name);
-			return (head->place);
-		}
-		head = head->next;
-	}
-	ft_error(champ);
-	return (0);
-}
 
 unsigned char	*dir_type4(t_champ *champ, int value)
 {
@@ -42,7 +19,7 @@ unsigned char	*dir_type4(t_champ *champ, int value)
 	if (!(res = ft_memalloc(4)))
 		ft_error(champ);
 	res[3] = value & 255;
-	res[2] = (value >> 8 ) & 255;
+	res[2] = (value >> 8) & 255;
 	res[1] = (value >> 16) & 255;
 	res[0] = (value >> 24) & 255;
 	return (res);

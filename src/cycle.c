@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/01 18:47:07 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/18 20:13:42 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ft_cycle(t_champ *champ)
 		label = 0;
 		if (is_label(head->token[0]))
 			label = 1;
-		champ->all_weight += add_instr(&champ->byte_code, instruction_to_byte(champ, head->token, label));
+		champ->all_weight += add_instr(&champ->byte_code,
+			instruction_to_byte(champ, head->token, label, NULL));
 		head = head->next;
 	}
 }
