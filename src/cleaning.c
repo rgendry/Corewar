@@ -29,9 +29,8 @@ void	free_nodes(t_label **nodes)
 	*nodes = NULL;
 }
 
-void	free_instr(t_instr **instr)
+void	free_instr(t_instr **instr, t_instr *node)
 {
-	t_instr *node;
 	t_instr *next;
 
 	node = *instr;
@@ -79,8 +78,8 @@ void	ft_clear_p2(t_champ *champ)
 {
 	if (champ->file_name_cor)
 		ft_strdel(&champ->file_name_cor);
-	if (champ->byte_code_all)
-		free(champ->byte_code_all);
+	if (champ->byte_c)
+		free(champ->byte_c);
 	if (champ->m_header)
 		free(champ->m_header);
 	if (champ->four_zero_bytes)
@@ -97,7 +96,7 @@ void	ft_clear_everything(t_champ *champ)
 		ft_free_tokens(champ);
 	if (champ->byte_code)
 	{
-		free_instr(&(champ->byte_code));
+		free_instr(&(champ->byte_code), NULL);
 		champ->byte_code = NULL;
 	}
 	if (champ->name && champ->name->name)

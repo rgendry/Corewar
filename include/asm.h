@@ -78,7 +78,7 @@ typedef struct              s_champ
     struct s_tokens         *string;
     unsigned char           *instr_byte;
     int                     instr_byte_len;
-    unsigned char           *byte_code_all;
+    unsigned char           *byte_c;
     unsigned char           *m_header;
     unsigned char           *four_zero_bytes;
     char                    *file_name_cor;

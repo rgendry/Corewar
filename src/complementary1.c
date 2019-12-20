@@ -6,20 +6,21 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/18 20:06:51 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/20 18:08:13 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		ft_check_cmd_string(t_champ *champ, char *str, int i, char CMD)
+int		ft_check_cmd_string(t_champ *champ, char *str, int i, char cmd)
 {
 	int len_decl_name;
 
-	len_decl_name = ft_strlen(CMD == 'n' ? NAME_CMD_STRING : COMMENT_CMD_STRING);
+	len_decl_name = ft_strlen(cmd == 'n' ? NAME_CMD_STRING :
+			COMMENT_CMD_STRING);
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
-	if (ft_strncmp(CMD == 'n' ? NAME_CMD_STRING : COMMENT_CMD_STRING,
+	if (ft_strncmp(cmd == 'n' ? NAME_CMD_STRING : COMMENT_CMD_STRING,
 		str + i, len_decl_name))
 		ft_syntax_error(champ);
 	i += len_decl_name;
@@ -44,7 +45,8 @@ int		is_emptystr(char *str)
 
 void	ft_initialization(t_champ *champ)
 {
-	if (!(champ->com = malloc(sizeof(t_com))) || !(champ->name = malloc(sizeof(t_name))))
+	if (!(champ->com = malloc(sizeof(t_com))) ||
+			!(champ->name = malloc(sizeof(t_name))))
 		ft_error(champ);
 	if (!(champ->four_zero_bytes = ft_memalloc(4)))
 		ft_error(champ);

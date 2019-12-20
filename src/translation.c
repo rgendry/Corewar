@@ -97,6 +97,6 @@ void	ft_translation(t_champ *champ)
 	all_len = ft_assembly(champ);
 	if (!(fd = open(champ->file_name_cor, O_WRONLY | O_CREAT, 0666)))
 		ft_error(champ);
-	write(fd, champ->byte_code_all, all_len);
+	write(fd, champ->byte_c, all_len);
 	ft_printf("Writing output program to %s\n", champ->file_name_cor);
 }
