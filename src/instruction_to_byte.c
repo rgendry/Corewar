@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:46:38 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/15 18:29:48 by rgendry          ###   ########.fr       */
+/*   Updated: 2019/12/18 20:35:24 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ unsigned char	operation_type(t_champ *champ, char *str)
 
 unsigned char	arg_type(char **token, int label)
 {
-	int		increment;
+	int				increment;
 	unsigned char	res;
 
 	res = 0;
@@ -62,7 +62,22 @@ unsigned char	arg_type(char **token, int label)
 	return (res);
 }
 
-t_arg	*arg_to_byte(t_champ *champ, char *str, char type)
+void			dir_type(t_champ *champ, t_arg *arg, char *str, char type)
+{
+	if ((type >= 1 && type <= 8) || type == 13 || type == 16)
+	{
+		arg->weight = 4;
+		arg->byte_code = dir_to_byte(champ, str, 4);
+	}
+	if ((type >= 9 && type <= 12) || type == 14 || type == 15)
+	{
+		arg->weight = 2;
+		arg->byte_code = dir_to_byte(champ, str, 2);
+	}
+	return ;
+}
+
+t_arg			*arg_to_byte(t_champ *champ, char *str, char type)
 {
 	t_arg	*arg;
 
@@ -74,18 +89,7 @@ t_arg	*arg_to_byte(t_champ *champ, char *str, char type)
 		arg->byte_code = reg_to_byte(champ, str);
 	}
 	if (check_arg_type(str) == 2)
-	{
-		if ((type >= 1 && type <= 8) || type == 13 || type == 16)
-		{
-			arg->weight = 4;
-			arg->byte_code = dir_to_byte(champ, str, 4);
-		}
-		if ((type >= 9 && type <= 12) || type == 14 || type == 15)
-		{
-			arg->weight = 2;
-			arg->byte_code = dir_to_byte(champ, str, 2);
-		}
-	}
+		dir_type(champ, arg, str, type);
 	if (check_arg_type(str) == 3)
 	{
 		arg->weight = 2;
@@ -94,30 +98,12 @@ t_arg	*arg_to_byte(t_champ *champ, char *str, char type)
 	return (arg);
 }
 
-void ft_count_current_weight(t_instr *byte_code)
+t_instr			*instruction_to_byte(t_champ *champ, char **token, int label,
+	t_instr *byte_code)
 {
-	byte_code->weight = 0;
-
-	if (byte_code->instr)
-		byte_code->weight++;
-	if (byte_code->type)
-		byte_code->weight++;
-	if (byte_code->arg1)
-		byte_code->weight += byte_code->arg1->weight;
-	if (byte_code->arg2)
-		byte_code->weight += byte_code->arg2->weight;
-	if (byte_code->arg3)
-		byte_code->weight += byte_code->arg3->weight;
-}
-
-t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
-{
-	t_instr	*byte_code;
-
-	byte_code = NULL;
 	if (label && !token[1])
 		return (NULL);
-	if (!(byte_code = (t_instr *) malloc (sizeof(t_instr))))
+	if (!(byte_code = (t_instr *)malloc(sizeof(t_instr))))
 		ft_error(champ);
 	byte_code->instr = operation_type(champ, token[0 + label]);
 	byte_code->type = 0;
@@ -127,18 +113,16 @@ t_instr	*instruction_to_byte(t_champ *champ, char **token, int label)
 	if (byte_code->instr != 1 && byte_code->instr != 9 &&
 		byte_code->instr != 12 && byte_code->instr != 15)
 		byte_code->type = arg_type(token, label);
-	int i = 1;
-	while (!is_emptystr(token[i + label]))
-    {
-	    if (i == 1)
-            byte_code->arg1 = arg_to_byte(champ, token[1 + label], byte_code->instr);
-	    if (i == 2)
-            byte_code->arg2 = arg_to_byte(champ, token[2 + label], byte_code->instr);
-	    if (i == 3)
-            byte_code->arg3 = arg_to_byte(champ, token[3 + label], byte_code->instr);
-	    i++;
-    }
+	if (!is_emptystr(token[1 + label]))
+		byte_code->arg1 = arg_to_byte(champ, token[1 + label],
+		byte_code->instr);
+	if (!is_emptystr(token[2 + label]))
+		byte_code->arg2 = arg_to_byte(champ, token[2 + label],
+		byte_code->instr);
+	if (!is_emptystr(token[3 + label]))
+		byte_code->arg3 = arg_to_byte(champ, token[3 + label],
+		byte_code->instr);
 	byte_code->next = NULL;
-    ft_count_current_weight(byte_code);
+	ft_count_current_weight(byte_code);
 	return (byte_code);
 }
