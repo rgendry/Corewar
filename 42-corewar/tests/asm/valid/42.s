@@ -83,7 +83,7 @@ bite:	sti     r1,%:copie,%2
 	sti	r1,%:b0,%1
 
 	ld	%0,r2
-	ld	%8,r3		# prepare les fork
+	ld	%8,r3		# prepare les fork ###############
 	ld	%1,r4
 	ld	%0,r6
 
