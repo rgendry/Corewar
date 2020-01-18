@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/18 19:55:56 by rgendry          ###   ########.fr       */
+/*   Updated: 2020/01/18 16:32:08 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,76 @@ char		*spaces(char *str, int i, int j, char *new)
 	return (new);
 }
 
+int			check_minus(char **token)
+{
+	char	*error;
+
+	if (is_label(token[0]))
+		error = token[1];
+	else
+		error = token[0];
+	while (*error >= 'a' && *error <= 'z')
+		error++;
+	if (*error == '-')
+		error++;
+	else
+		return (0);
+	while (*error >= '0' && *error <= '9')
+		error++;
+	if (*error == '\0')
+		return(1);
+	return (0);
+}
+
+void		del_label(t_label **labels, char **token)
+{
+	t_label **head;
+
+	if (!is_label(token[0]))
+		return ;
+	head = labels;
+	while (*head && (*head)->next)
+		*head = (*head)->next;
+	free (*head);
+	*head = NULL;
+}
+
+// void		print_labels(t_label *labels)
+// {
+// 	t_label	*head;
+
+// 	head = labels;
+// 	while (head)
+// 	{
+// 		ft_printf("%s\n", head->name);
+// 		head = head->next;
+// 	}
+// }
+
+char		*added_space(char *str)
+{
+	int		i;
+	int		j;
+	char	*newstr;
+
+	i = 0;
+	j = 0;
+	newstr = ft_memalloc(sizeof(char) * (ft_strlen(str) + 2));
+	while (str[i])
+	{
+		if (str[i] == '-' && (str[i - 1] >= 'a' && str[i - 1] <= 'z'))
+		{
+			newstr[j] = ' ';
+			j++;
+		}
+		newstr[j] = str[i];
+		i++;
+		j++;
+	}
+	free(str);
+	return (newstr);
+}
+
 t_tokens	*check_operations(t_champ *champ, char *str)
 {
 	int			type;
@@ -75,6 +145,7 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 
 	if (is_emptystr(str))
 		return (NULL);
+	ft_printf("%s\n", str);
 	new = malloc(sizeof(t_tokens));
 	newstr = spaces(str, 0, 0, NULL);
 	new->token = ft_strsplit(newstr, SEPARATOR_CHAR);
@@ -87,7 +158,16 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 	if (type == 1 && new->token[1])
 		type = check_op_type(champ, new->token[1], new->token, 1);
 	if (type < 1)
+	{
+		if (check_minus(new->token))
+		{
+			del_label(&(champ->labels), new->token);
+			free_arr(&(new->token));
+			free(new);
+			return (check_operations(champ, added_space(newstr)));
+		}
 		ft_syntax_error(champ);
+	}
 	new->next = NULL;
 	ft_strdel(&newstr);
 	return (new);
