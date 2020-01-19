@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/18 20:59:07 by rgendry          ###   ########.fr       */
+/*   Updated: 2020/01/19 16:29:38 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	ft_clear_p2(t_champ *champ)
 		free(champ->instr_byte);
 	if (champ->byte_code)
 		free(champ->byte_code);
+	if (champ->exec_size)
+		free(champ->exec_size);
 }
 
 void	ft_clear_everything(t_champ *champ)

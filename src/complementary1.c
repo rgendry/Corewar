@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 13:41:19 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/12/20 18:08:13 by ubartemi         ###   ########.fr       */
+/*   Updated: 2020/01/19 16:43:36 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_check_cmd_string(t_champ *champ, char *str, int i, char cmd)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	if (ft_strncmp(cmd == 'n' ? NAME_CMD_STRING : COMMENT_CMD_STRING,
-		str + i, len_decl_name))
+				str + i, len_decl_name))
 		ft_syntax_error(champ);
 	i += len_decl_name;
 	return (i - 1);
@@ -36,6 +36,8 @@ int		is_emptystr(char *str)
 		return (1);
 	while (str[++i])
 	{
+		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+			break ;
 		if (str[i] == ' ' || str[i] == '\t')
 			continue;
 		return (0);
@@ -72,6 +74,27 @@ void	ft_initialization(t_champ *champ)
 int		is_comment(char *str)
 {
 	if (*str == COMMENT_CHAR || *str == ALT_COMMENT_CHAR)
+		return (1);
+	return (0);
+}
+
+int		check_minus(char **token)
+{
+	char	*error;
+
+	if (is_label(token[0]))
+		error = token[1];
+	else
+		error = token[0];
+	while (*error >= 'a' && *error <= 'z')
+		error++;
+	if (*error == '-')
+		error++;
+	else
+		return (0);
+	while (*error >= '0' && *error <= '9')
+		error++;
+	if (*error == '\0')
 		return (1);
 	return (0);
 }

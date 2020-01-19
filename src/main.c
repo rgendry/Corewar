@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:29:46 by rgendry           #+#    #+#             */
-/*   Updated: 2019/12/18 19:59:45 by rgendry          ###   ########.fr       */
+/*   Updated: 2020/01/19 16:46:37 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,5 @@ int		main(int argc, char **argv)
 	ft_parse(&champ, 0);
 	ft_translation(&champ);
 	ft_clear_everything(&champ);
-	exit(EXIT_SUCCESS);
+	return (0);
 }
