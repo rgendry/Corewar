@@ -93,12 +93,18 @@ char		*added_space(char *str)
 
 t_tokens	*under_norm(t_champ *champ, char *newstr, t_tokens *new)
 {
+    char        *tmp_str;
+    t_tokens    *tmp;
+
 	if (check_minus(new->token))
 	{
 		del_label(&(champ->labels), new->token);
 		free_arr(&(new->token));
 		free(new);
-		return (check_operations(champ, added_space(newstr)));
+		tmp_str = added_space(newstr);
+		tmp = check_operations(champ, tmp_str);
+        ft_strdel(&tmp_str);
+		return (tmp);
 	}
 	free_arr(&(new->token));
 	free(new);
@@ -122,7 +128,7 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 	if (type == 1 && new->token[1])
 		type = check_op_type(champ, new->token[1], new->token, 1);
 	if (type < 1)
-		return (under_norm(champ, newstr, new));
+    	return (under_norm(champ, newstr, new));
 	new->next = NULL;
 	ft_strdel(&newstr);
 	return (new);

@@ -57,6 +57,7 @@ void	del_label(t_label **labels, char **token)
 	head = labels;
 	while (*head && (*head)->next)
 		*head = (*head)->next;
+	free((*head)->name);
 	free(*head);
 	*head = NULL;
 }
