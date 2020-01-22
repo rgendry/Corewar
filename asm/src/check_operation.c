@@ -6,7 +6,7 @@
 /*   By: rgendry <rgendry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 19:36:41 by rgendry           #+#    #+#             */
-/*   Updated: 2020/01/19 16:45:25 by ubartemi         ###   ########.fr       */
+/*   Updated: 2020/01/22 12:33:00 by rgendry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ char		*added_space(char *str)
 
 t_tokens	*under_norm(t_champ *champ, char *newstr, t_tokens *new)
 {
-    char        *tmp_str;
-    t_tokens    *tmp;
+	char		*tmp_str;
+	t_tokens	*tmp;
 
 	if (check_minus(new->token))
 	{
@@ -103,7 +103,7 @@ t_tokens	*under_norm(t_champ *champ, char *newstr, t_tokens *new)
 		free(new);
 		tmp_str = added_space(newstr);
 		tmp = check_operations(champ, tmp_str);
-        ft_strdel(&tmp_str);
+		ft_strdel(&tmp_str);
 		return (tmp);
 	}
 	free_arr(&(new->token));
@@ -128,7 +128,7 @@ t_tokens	*check_operations(t_champ *champ, char *str)
 	if (type == 1 && new->token[1])
 		type = check_op_type(champ, new->token[1], new->token, 1);
 	if (type < 1)
-    	return (under_norm(champ, newstr, new));
+		return (under_norm(champ, newstr, new));
 	new->next = NULL;
 	ft_strdel(&newstr);
 	return (new);
